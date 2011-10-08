@@ -6,6 +6,7 @@ gem 'rack', '1.3.3'
 
 gem 'pg'
 
+
 group :assets do
   gem 'therubyracer'
   gem 'sass-rails', "  ~> 3.1.0"
