@@ -3,3 +3,14 @@ Level Review Project
 @author daigong
 
 For teacher level up and review the level info.
+
+database problem
+
+# /tmp/.s.PGSQL.5432
+# mkdir /var/run/postgresql
+# ln -s  /tmp/.s.PGSQL.5432 /var/run/postgresql/.s.PGSQL.5432
+
+git commit
+#git add
+#git commit -am 'commit message'
+#git push origin master

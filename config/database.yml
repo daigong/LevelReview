@@ -54,6 +54,3 @@ production:
   username: postgres
   password:
 
-# /tmp/.s.PGSQL.5432
-# mkdir /var/run/postgresql
-# ln -s  /tmp/.s.PGSQL.5432 /var/run/postgresql/.s.PGSQL.5432
