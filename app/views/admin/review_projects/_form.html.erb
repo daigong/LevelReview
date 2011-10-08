@@ -1,0 +1,11 @@
+<%= semantic_form_for @admin_review_project, :validate=>true do |f| %>
+    <%= f.inputs do %>
+        <%= f.input :name %>
+        <%= f.input :state %>
+        <%= f.input :remark %>
+    <% end %>
+
+    <%= f.buttons do %>
+        <%= f.commit_button %>
+    <% end %>
+<% end %>

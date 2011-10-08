@@ -1,0 +1,2 @@
+module BaseReview::BaseReviewActivityHelper
+end

@@ -1,0 +1,2 @@
+module JiaowuReview::ReviewActivityHelper
+end

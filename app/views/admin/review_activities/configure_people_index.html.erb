@@ -1,0 +1,22 @@
+<div>
+  <h3>
+    <%= @admin_review_activity.name %>--人员配置
+  </h3>
+</div>
+<div>
+  <h3>
+    参与人员列表
+  </h3>
+  <div>
+    查询
+  </div>
+  <div>
+    列表分页
+  </div>
+  <div>
+    取消按钮、设置登录时间按钮、设置组长按钮（需要判定类型）
+  </div>
+</div>
+<div>
+  <%= link_to "配置人员", configure_people_search_index_admin_review_activity_url(@admin_review_activity) %>
+</div>

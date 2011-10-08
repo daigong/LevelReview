@@ -1,0 +1,53 @@
+<p id="notice">
+  <%= notice %>
+</p>
+
+<p>
+  <b>审评项目名称:</b>
+  <%= @admin_review_project.name %>
+</p>
+
+<p>
+  <b>项目当前状态:</b>
+  <%= @admin_review_project.state %>
+</p>
+
+<p>
+  <b>项目备注:</b>
+  <%= @admin_review_project.remark %>
+</p>
+<div>
+  <div>
+    <h3>
+      项目中活动:
+    </h3>
+  </div>
+  <div>
+    <% @admin_review_project.project_activities.each do |activity| %>
+        <div>
+          <p>活动名字：<%= activity.name %></p>
+
+          <p>
+            <b>开始时间：</b>
+            <%= activity.begin_time %>
+            <b>结束时间：</b>
+            <%= activity.end_time %>
+            <%= link_to "进入活动中维护", activity %>
+          </p>
+          <hr/>
+        </div>
+
+    <% end %>
+  </div>
+</div>
+<div>
+  <div><h3>其他配置</h3></div>
+  <div>
+    部门排序配置
+  </div>
+  <div>
+    领导查阅模块配置
+  </div>
+</div>
+<%= link_to 'Edit', edit_admin_review_project_path(@admin_review_project) %> |
+<%= link_to 'Back', admin_review_projects_path %>

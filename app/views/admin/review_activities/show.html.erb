@@ -1,0 +1,22 @@
+<h3>活动基本信息</h3>
+<p>
+  <b>名称</b>
+  <%= @admin_review_activity.name %>
+</p>
+
+<p>
+  <b>开始时间</b>
+  <%= @admin_review_activity.begin_time %>
+</p>
+
+<p>
+  <b>结束时间</b>
+  <%= @admin_review_activity.end_time %>
+</p>
+
+<p>
+  <b>所属项目</b>
+  <%= link_to @admin_review_activity.review_project.name, @admin_review_activity.review_project %>
+</p>
+<h3>活动定制信息</h3>
+<%= link_to '回退', :back %>
