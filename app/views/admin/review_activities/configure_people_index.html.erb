@@ -7,11 +7,44 @@
   <h3>
     参与人员列表
   </h3>
+
   <div>
-    查询
+    <%= form_for @search, :url=>configure_people_search_index_admin_review_activity_url do |f| %>
+        <%= hidden_field_tag :activity_id, params[:id] %>
+        <%= f.label :user_name_contains, "用户名" %>
+        <%= f.text_field :user_name_contains %>
+        <%= f.label :person_name_contains, "人员姓名" %>
+        <%= f.text_field :person_name_contains %>
+        <%= f.label :department_id_eq, "部门" %>
+        <%= f.select :department_id_eq, departments_options(params[:search][:department_id_eq]), :include_blank=>true %>
+        <%= f.label :department_subject_id_eq, "学科组" %>
+        <%= f.select :department_subject_id_eq, subjects_options(params[:search][:department_subject_id_eq]), :include_blank=>true %>
+        <%= f.submit "查询" %>
+    <% end %>
   </div>
   <div>
-    列表分页
+    <table>
+      <tr>
+        <th>-</th>
+        <th>用户名</th>
+        <th>人员姓名</th>
+        <th>部门</th>
+        <th>学科组</th>
+        <th></th>
+        <th></th>
+      </tr>
+      <% @people.each do |admin_person| %>
+          <tr>
+            <td><input type="checkbox" class="table_person_id"/></td>
+            <td><%= admin_person.user_name %></td>
+            <td><%= admin_person.person_name %></td>
+            <td><%= admin_person.department.name unless admin_person.department.nil? %></td>
+            <td><%= admin_person.department.subject.name unless admin_person.department.nil? %></td>
+            <td><%= link_to 'Show', admin_person %></td>
+            <td><%= link_to 'Edit', edit_admin_person_path(admin_person) %></td>
+          </tr>
+      <% end %>
+    </table>
   </div>
   <div>
     取消按钮、设置登录时间按钮

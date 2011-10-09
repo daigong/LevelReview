@@ -1,22 +1,49 @@
+<%= content_for :javascript do %>
+    <script type="text/javascript">
+        $(function() {
+            //人员参与活动提交按钮
+            $('#configure_people_commit').click(function() {
+                var $checked_people = $('.table_person_id:checked');
+                if ($checked_people.length == 0) {
+                    alert("请选择要添加的人员");
+                    return;
+                }
+                var check_id_array = [];
+                $checked_people.each(function() {
+                    check_id_array.push($(this).val());
+                })
+                $.post('<%=configure_people_commit_admin_review_activity_url %>', {ids:check_id_array.join(',')}, function(ids) {
+                    window.location.reload();
+                }, 'json');
+            });
+        })
+    </script>
+<% end %>
 <div>
-  <h3>可选择的人员列表</h3>
+  <h3>人员列表</h3>
 </div>
 <div>
   <%= form_for @search, :url=>configure_people_search_index_admin_review_activity_url do |f| %>
-      <%= hidden_field_tag :activity_id, params[:id] %>
+      <%= f.label :user_name_contains, "用户名" %>
+      <%= f.text_field :user_name_contains %>
+      <%= f.label :person_name_contains, "人员姓名" %>
+      <%= f.text_field :person_name_contains %>
       <%= f.label :department_id_eq, "部门" %>
       <%= f.select :department_id_eq, departments_options(params[:search][:department_id_eq]), :include_blank=>true %>
       <%= f.label :department_subject_id_eq, "学科组" %>
       <%= f.select :department_subject_id_eq, subjects_options(params[:search][:department_subject_id_eq]), :include_blank=>true %>
-      <%= f.submit %>
+      <%= f.submit "查询" %>
   <% end %>
+</div>
+<div>
+  <button id="configure_people_commit">选择人员</button>
 </div>
 <div>
   <table>
     <tr>
-      <th>User name</th>
-      <th>Password</th>
-      <th>Person name</th>
+      <th>-</th>
+      <th>用户名</th>
+      <th>人员姓名</th>
       <th>部门</th>
       <th>学科组</th>
       <th></th>
@@ -24,8 +51,15 @@
     </tr>
     <% @people.each do |admin_person| %>
         <tr>
+          <td>
+            <%# 判断该用户是否已经被选择进入该活动 %>
+            <% if @people_in_activity.include? admin_person %>
+                已选择
+            <% else %>
+                <%= check_box_tag "table_person_id_#{ admin_person.id}", admin_person.id, false, :class=>'table_person_id' %>
+            <% end %>
+          </td>
           <td><%= admin_person.user_name %></td>
-          <td><%= admin_person.password %></td>
           <td><%= admin_person.person_name %></td>
           <td><%= admin_person.department.name unless admin_person.department.nil? %></td>
           <td><%= admin_person.department.subject.name unless admin_person.department.nil? %></td>
@@ -35,9 +69,6 @@
     <% end %>
   </table>
 </div>
-<div>
-  批量选择按钮
-</div>
 <%= will_paginate @people, {:previous_label => '上一页', :next_label => '下一页'} %>
 <%= link_to '新增人员', new_admin_person_url %>
-<%= link_to '查看已经选择的列表', :back %>
+<%= link_to '查看已经选择的列表', configure_people_index_admin_review_activity_url(@admin_review_activity) %>

@@ -29,22 +29,35 @@ class Admin::ReviewActivitiesController < ApplicationController
   #配置该活动人员页面跳转
   def configure_people_index
     @admin_review_activity = Admin::ReviewActivity.find(params[:id])
+    params[:search] = {} if params[:search].nil?
+    @search = Admin::Person.search params[:search]
+    @people = @search.
+        #子查询查询到已经参加到活动的人的id
+    where('admin_people.id in ( select admin_people.id from admin_people inner join admin_person_activity_relations relation on relation.person_id = admin_people.id where relation.activity_id = ? )', @admin_review_activity.id).
+        paginate(:page => params[:page]);
   end
 
   #配置人员筛选列表
   def configure_people_search_index
+    @admin_review_activity = Admin::ReviewActivity.find(params[:id])
     params[:search] = {} if params[:search].nil?
     @search = Admin::Person.search params[:search]
     #查找当前还没在该活动内的人员
-    @people = @search.
-        #子查询查询到已经参加到活动的人的id
-        where('admin_people.id not in ( select admin_people.id from admin_people inner join admin_person_activity_relations relation on relation.person_id = admin_people.id where relation.activity_id = ? )', params[:activity_id]).
-        paginate(:page => params[:page]);
+    @people = @search.paginate(:page => params[:page]);
+    @people_in_activity = @admin_review_activity.people_in_activity
   end
 
   #配置人员提交处理
   def configure_people_commit
-
+    admin_review_activity = Admin::ReviewActivity.find(params[:id])
+    ids = params[:ids].split(',');
+    ids.each do |id|
+      person = Admin::Person.find id
+      person.join_activity admin_review_activity
+    end
+    respond_to do |format|
+      format.json { render :json => ids }
+    end
   end
 
 

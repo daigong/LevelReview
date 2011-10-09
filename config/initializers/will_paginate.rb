@@ -1,2 +1,2 @@
 # WillPaginate configure
-WillPaginate.per_page=1 # for debug
+WillPaginate.per_page=2 # for debug
