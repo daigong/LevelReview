@@ -23,4 +23,18 @@ class Admin::Person < ActiveRecord::Base
     end
   end
 
+  #退出活动
+  def quit_activity admin_review_activity
+    unless in_activity? admin_review_activity
+      #如果在活动内不做处理
+      return false;
+    else
+      relations = Admin::PersonActivityRelation.where({:person_id.eq=>self.id, :activity_id.eq=>admin_review_activity.id});
+      #理论上只可能有一个活动关联
+      relations.each do |relation|
+        relation.destroy
+      end
+      return true;
+    end
+  end
 end

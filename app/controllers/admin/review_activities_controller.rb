@@ -63,7 +63,15 @@ class Admin::ReviewActivitiesController < ApplicationController
 
   #配置人员取消处理
   def configure_people_cancel
-
+    admin_review_activity = Admin::ReviewActivity.find(params[:id])
+    ids = params[:ids].split(',');
+    ids.each do |id|
+      person = Admin::Person.find id
+      person.quit_activity admin_review_activity
+    end
+    respond_to do |format|
+      format.json { render :json => ids }
+    end
   end
 
   #设置组长 or 取消组长

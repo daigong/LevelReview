@@ -1,3 +1,28 @@
+<%= content_for :javascript do %>
+    <script type="text/javascript">
+        $(function() {
+            $('#configure_people_cancel').click(function() {
+                if (confirm("确认要取消这些人员参与该活动？")) {
+                    var $checked_people = $('.table_person_id:checked');
+                    if ($checked_people.length == 0) {
+                        alert("请选择人员");
+                        return;
+                    }
+                    var check_id_array = [];
+                    $checked_people.each(function() {
+                        check_id_array.push($(this).val());
+                    })
+                    $.post('<%=configure_people_cancel_admin_review_activity_url %>', {ids:check_id_array.join(',')}, function(ids) {
+                        window.location.reload();
+                    }, 'json');
+                }
+            });
+            $('#configure_person_login_time').click(function() {
+                alert('TODO It');
+            });
+        });
+    </script>
+<% end %>
 <div>
   <h3>
     <%= @admin_review_activity.name %>--人员配置
@@ -23,6 +48,10 @@
     <% end %>
   </div>
   <div>
+    <button id="configure_people_cancel">取消人员</button>
+    <button id="configure_person_login_time">设置人员登录时间</button>
+  </div>
+  <div>
     <table>
       <tr>
         <th>-</th>
@@ -35,7 +64,7 @@
       </tr>
       <% @people.each do |admin_person| %>
           <tr>
-            <td><input type="checkbox" class="table_person_id"/></td>
+            <td><%= check_box_tag "table_person_id_#{ admin_person.id}", admin_person.id, false, :class=>'table_person_id' %></td>
             <td><%= admin_person.user_name %></td>
             <td><%= admin_person.person_name %></td>
             <td><%= admin_person.department.name unless admin_person.department.nil? %></td>
