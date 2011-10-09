@@ -40,11 +40,11 @@ class Admin::Person < ActiveRecord::Base
 
   #设置人员参加活动时间
   def set_join_activity_time admin_review_activity, begin_time, end_time
-    return false if in_activity? admin_review_activity
+    return false unless in_activity? admin_review_activity
     relation = Admin::PersonActivityRelation.find_by_person_id_and_activity_id self.id, admin_review_activity.id
     #理论上只可能有一个活动关联
-    relation.login_begin_time=DateTime.parse(begin_time)
-    relation.login_end_time=DateTime.parse(end_time)
+    relation.login_begin_time=begin_time
+    relation.login_end_time=end_time
     relation.save
     return true;
   end

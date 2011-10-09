@@ -16,6 +16,7 @@ LevelReview::Application.routes.draw do
         post 'configure_person_leader'
         #配置人员登录时间
         post 'configure_person_login_time'
+        post 'configure_reset_person_login_time'
       end
     end
   end

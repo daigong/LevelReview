@@ -76,13 +76,27 @@ class Admin::ReviewActivitiesController < ApplicationController
 
   #配置活动内人员特殊登录时间 begin
   def configure_person_login_time
-    begin_time =params[:begin_time];
-    end_time =params[:end_time];
+    #时间格式：YYYY-mm-dd 23:59:59
+    begin_time = DateTime.strptime(params[:begin_time], "%Y-%m-%d %H:%M:%S")
+    end_time =DateTime.strptime(params[:end_time], "%Y-%m-%d %H:%M:%S")
     admin_review_activity = Admin::ReviewActivity.find(params[:id])
     ids = params[:ids].split(',');
     ids.each do |id|
       person = Admin::Person.find id
       person.set_join_activity_time admin_review_activity, begin_time, end_time
+    end
+    respond_to do |format|
+      format.json { render :json => ids }
+    end
+  end
+
+  #取消对用户设置的特殊登录时间
+  def configure_reset_person_login_time
+    admin_review_activity = Admin::ReviewActivity.find(params[:id])
+    ids = params[:ids].split(',');
+    ids.each do |id|
+      person = Admin::Person.find id
+      person.set_join_activity_time admin_review_activity, nil, nil
     end
     respond_to do |format|
       format.json { render :json => ids }
