@@ -33,7 +33,9 @@ class Admin::ReviewActivitiesController < ApplicationController
 
   #配置人员筛选列表
   def configure_people_search_index
-
+    params[:search] = {} if params[:search].nil?
+    @search = Admin::Person.search params[:search]
+    @people = @search.paginate(:page => params[:page]);
   end
 
   #配置人员提交处理
@@ -49,12 +51,12 @@ class Admin::ReviewActivitiesController < ApplicationController
 
   #设置组长 or 取消组长
   def configure_person_leader
-    
+
   end
 
   #配置活动内人员特殊登录时间 begin
   def configure_person_login_time
 
   end
-   #配置该活动人员 end
+  #配置该活动人员 end
 end

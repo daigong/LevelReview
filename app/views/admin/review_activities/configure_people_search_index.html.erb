@@ -1,10 +1,42 @@
-<div>可选择的人员列表</div>
-<div>查询条件</div>
 <div>
-  列表
+  <h3>可选择的人员列表</h3>
+</div>
+<div>
+  <%= form_for @search, :url=>configure_people_search_index_admin_review_activity_url do |f| %>
+      <%= f.label :department_id_eq, "部门" %>
+      <%= f.select :department_id_eq, departments_options(params[:search][:department_id_eq]), :include_blank=>true %>
+      <%= f.label :department_subject_id_eq, "学科组" %>
+      <%= f.select :department_subject_id_eq, subjects_options(params[:search][:department_subject_id_eq]), :include_blank=>true %>
+      <%= f.submit %>
+  <% end %>
+</div>
+<div>
+  <table>
+    <tr>
+      <th>User name</th>
+      <th>Password</th>
+      <th>Person name</th>
+      <th>部门</th>
+      <th>学科组</th>
+      <th></th>
+      <th></th>
+    </tr>
+    <% @people.each do |admin_person| %>
+        <tr>
+          <td><%= admin_person.user_name %></td>
+          <td><%= admin_person.password %></td>
+          <td><%= admin_person.person_name %></td>
+          <td><%= admin_person.department.name unless admin_person.department.nil? %></td>
+          <td><%= admin_person.department.subject.name unless admin_person.department.nil? %></td>
+          <td><%= link_to 'Show', admin_person %></td>
+          <td><%= link_to 'Edit', edit_admin_person_path(admin_person) %></td>
+        </tr>
+    <% end %>
+  </table>
 </div>
 <div>
   批量选择按钮
 </div>
+<%= will_paginate @people, {:previous_label => '上一页', :next_label => '下一页'} %>
 <%= link_to '新增人员', new_admin_person_url %>
 <%= link_to '查看已经选择的列表', :back %>
