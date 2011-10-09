@@ -15,4 +15,15 @@ module Admin::PeopleHelper
       return "由 #{login_time_result[:begin_time].to_s} 到 #{login_time_result[:end_time].to_s} "
     end
   end
+
+  #判定用户在活动中是否是组长
+  #如果用户没有参加活动,返回false
+  def person_is_leader? person, activity
+    relation = Admin::PersonActivityRelation.find_by_person_id_and_activity_id person.id, activity.id
+    if relation.nil?
+      return false
+    else
+      return relation.is_leader
+    end
+  end
 end

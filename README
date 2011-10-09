@@ -14,3 +14,6 @@ git commit
 #git add
 #git commit -am 'commit message'
 #git push origin master
+
+#TODO List
+1.人员需要单独选择学科组和部门，因为学科组的人可能没有部门

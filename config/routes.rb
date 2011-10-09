@@ -17,6 +17,10 @@ LevelReview::Application.routes.draw do
         #配置人员登录时间
         post 'configure_person_login_time'
         post 'configure_reset_person_login_time'
+        #设置组长
+        get 'configure_activity_leader_index'
+        post 'configure_activity_leader_commit'
+        post 'configure_activity_leader_cancel'
       end
     end
   end

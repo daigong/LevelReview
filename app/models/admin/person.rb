@@ -63,4 +63,13 @@ class Admin::Person < ActiveRecord::Base
       return {:type=>'activity_set_time', :begin_time=>relation.login_begin_time, :end_time=>relation.login_end_time}
     end
   end
+
+  #设置是否组长is_leader?true:false 组长\非组长
+  def set_activity_leader admin_review_activity, is_leader
+    return false unless in_activity? admin_review_activity
+    relation = Admin::PersonActivityRelation.find_by_person_id_and_activity_id self.id, admin_review_activity.id
+    relation.is_leader=is_leader
+    relation.save
+    return true;
+  end
 end

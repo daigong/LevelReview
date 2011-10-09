@@ -1,0 +1,80 @@
+<%= content_for :javascript do %>
+    <script type="text/javascript">
+        $(function() {
+            $('#configure_activity_leader_commit').click(function() {
+                var $checked_people = $('.table_person_id:checked');
+                if ($checked_people.length == 0) {
+                    alert("请选择人员");
+                    return;
+                }
+                var check_id_array = [];
+                $checked_people.each(function() {
+                    check_id_array.push($(this).val());
+                })
+                $.post('<%=configure_activity_leader_commit_admin_review_activity_url %>', {ids:check_id_array.join(',')}, function(ids) {
+                    window.location.reload();
+                }, 'json');
+            });
+            $('#configure_activity_leader_cancel').click(function() {
+                var $checked_people = $('.table_person_id:checked');
+                if ($checked_people.length == 0) {
+                    alert("请选择人员");
+                    return;
+                }
+                var check_id_array = [];
+                $checked_people.each(function() {
+                    check_id_array.push($(this).val());
+                })
+                $.post('<%=configure_activity_leader_cancel_admin_review_activity_url %>', {ids:check_id_array.join(',')}, function(ids) {
+                    window.location.reload();
+                }, 'json');
+            });
+        });
+    </script>
+<% end %>
+<h3>配置组长</h3>
+<div>
+  <button id="configure_activity_leader_commit">设置组长</button>
+  <button id="configure_activity_leader_cancel">取消组长</button>
+</div>
+<div>
+  <table>
+    <tr>
+      <th>-</th>
+      <th>用户名</th>
+      <th>人员姓名</th>
+      <th>部门</th>
+      <th>学科组</th>
+      <th>是否是组长</th>
+      <th>活动内登录时间</th>
+      <th></th>
+      <th></th>
+    </tr>
+    <% @people_in_activity.each do |admin_person| %>
+        <tr>
+          <td><%= check_box_tag "table_person_id_#{ admin_person.id}", admin_person.id, false, :class=>'table_person_id' %></td>
+          <td><%= admin_person.user_name %></td>
+          <td><%= admin_person.person_name %></td>
+          <td><%= admin_person.department.name unless admin_person.department.nil? %></td>
+          <td><%= admin_person.department.subject.name unless admin_person.department.nil? %></td>
+          <td>
+            <% if person_is_leader? admin_person, @admin_review_activity %>
+            组长
+            <% else %>
+            组员
+            <% end %>
+          </td>
+          <td><%= person_activity_time admin_person, @admin_review_activity %></td>
+          <td><%= link_to 'Show', admin_person %></td>
+          <td><%= link_to 'Edit', edit_admin_person_path(admin_person) %></td>
+        </tr>
+    <% end %>
+  </table>
+</div>
+<div>
+  分页
+</div>
+<div>
+  <%= link_to "回退", :back %>
+  <%= link_to "配置人员", configure_people_index_admin_review_activity_url(@admin_review_activity) %>
+</div>

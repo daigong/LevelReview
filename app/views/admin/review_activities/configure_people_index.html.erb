@@ -71,7 +71,7 @@
   </h3>
 
   <div>
-    <%= form_for @search, :url=>configure_people_search_index_admin_review_activity_url do |f| %>
+    <%= form_for @search, :url=>configure_people_index_admin_review_activity_url do |f| %>
         <%= hidden_field_tag :activity_id, params[:id] %>
         <%= f.label :user_name_contains, "用户名" %>
         <%= f.text_field :user_name_contains %>
@@ -119,9 +119,6 @@
           </tr>
       <% end %>
     </table>
-  </div>
-  <div>
-    取消按钮、设置登录时间按钮
   </div>
 </div>
 <div>

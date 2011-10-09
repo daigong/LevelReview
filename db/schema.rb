@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111009021336) do
+ActiveRecord::Schema.define(:version => 20111009124502) do
 
   create_table "admin_departments", :force => true do |t|
     t.string   "name"
@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(:version => 20111009021336) do
     t.datetime "login_end_time"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "is_leader",        :default => false
   end
 
   add_index "admin_person_activity_relations", ["activity_id"], :name => "index_admin_person_activity_relations_on_activity_id"

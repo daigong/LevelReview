@@ -4,7 +4,6 @@ class CreateAdminReviewProjects < ActiveRecord::Migration
       t.string :name
       t.string :state
       t.text :remark
-
       t.timestamps
     end
   end
