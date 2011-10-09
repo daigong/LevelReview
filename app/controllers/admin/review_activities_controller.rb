@@ -74,14 +74,25 @@ class Admin::ReviewActivitiesController < ApplicationController
     end
   end
 
+  #配置活动内人员特殊登录时间 begin
+  def configure_person_login_time
+    begin_time =params[:begin_time];
+    end_time =params[:end_time];
+    admin_review_activity = Admin::ReviewActivity.find(params[:id])
+    ids = params[:ids].split(',');
+    ids.each do |id|
+      person = Admin::Person.find id
+      person.set_join_activity_time admin_review_activity, begin_time, end_time
+    end
+    respond_to do |format|
+      format.json { render :json => ids }
+    end
+  end
+
   #设置组长 or 取消组长
   def configure_person_leader
 
   end
 
-  #配置活动内人员特殊登录时间 begin
-  def configure_person_login_time
-
-  end
   #配置该活动人员 end
 end

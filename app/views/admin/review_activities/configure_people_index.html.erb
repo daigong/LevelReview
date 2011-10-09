@@ -18,7 +18,26 @@
                 }
             });
             $('#configure_person_login_time').click(function() {
-                alert('TODO It');
+                if (confirm("确认要特殊设置人员参活动时间？")) {
+                    var $checked_people = $('.table_person_id:checked');
+                    if ($checked_people.length == 0) {
+                        alert("请选择人员");
+                        return;
+                    }
+                    var check_id_array = [];
+                    $checked_people.each(function() {
+                        check_id_array.push($(this).val());
+                    })
+                    var input_begin_time = $('#configure_person_login_time_begin_time').val();
+                    var input_end_time = $('#configure_person_login_time_end_time').val();
+                    $.post('<%=configure_person_login_time_admin_review_activity_url %>', {
+                        ids:check_id_array.join(','),
+                        begin_time:input_begin_time,
+                        end_time:input_end_time
+                    }, function(ids) {
+                        window.location.reload();
+                    }, 'json');
+                }
             });
         });
     </script>
@@ -50,6 +69,11 @@
   <div>
     <button id="configure_people_cancel">取消人员</button>
     <button id="configure_person_login_time">设置人员登录时间</button>
+    开始时间
+    <%= text_field_tag :configure_person_login_time_begin_time, DateTime.now %>
+    &gt;&gt;
+    结束时间
+    <%= text_field_tag :configure_person_login_time_end_time, DateTime.now %>
   </div>
   <div>
     <table>
@@ -59,6 +83,7 @@
         <th>人员姓名</th>
         <th>部门</th>
         <th>学科组</th>
+        <th>活动内登录时间</th>
         <th></th>
         <th></th>
       </tr>
@@ -69,6 +94,7 @@
             <td><%= admin_person.person_name %></td>
             <td><%= admin_person.department.name unless admin_person.department.nil? %></td>
             <td><%= admin_person.department.subject.name unless admin_person.department.nil? %></td>
+            <td><%= person_activity_time admin_person, @admin_review_activity %></td>
             <td><%= link_to 'Show', admin_person %></td>
             <td><%= link_to 'Edit', edit_admin_person_path(admin_person) %></td>
           </tr>
