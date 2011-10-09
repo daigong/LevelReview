@@ -35,7 +35,11 @@ class Admin::ReviewActivitiesController < ApplicationController
   def configure_people_search_index
     params[:search] = {} if params[:search].nil?
     @search = Admin::Person.search params[:search]
-    @people = @search.paginate(:page => params[:page]);
+    #查找当前还没在该活动内的人员
+    @people = @search.
+        #子查询查询到已经参加到活动的人的id
+        where('admin_people.id not in ( select admin_people.id from admin_people inner join admin_person_activity_relations relation on relation.person_id = admin_people.id where relation.activity_id = ? )', params[:activity_id]).
+        paginate(:page => params[:page]);
   end
 
   #配置人员提交处理

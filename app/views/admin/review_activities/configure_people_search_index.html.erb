@@ -3,6 +3,7 @@
 </div>
 <div>
   <%= form_for @search, :url=>configure_people_search_index_admin_review_activity_url do |f| %>
+      <%= hidden_field_tag :activity_id, params[:id] %>
       <%= f.label :department_id_eq, "部门" %>
       <%= f.select :department_id_eq, departments_options(params[:search][:department_id_eq]), :include_blank=>true %>
       <%= f.label :department_subject_id_eq, "学科组" %>
