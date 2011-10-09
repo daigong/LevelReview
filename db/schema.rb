@@ -11,7 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111007054759) do
+ActiveRecord::Schema.define(:version => 20111009021336) do
+
+  create_table "admin_departments", :force => true do |t|
+    t.string   "name"
+    t.text     "remark"
+    t.integer  "subject_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "admin_departments", ["subject_id"], :name => "index_admin_departments_on_subject_id"
 
   create_table "admin_people", :force => true do |t|
     t.string   "user_name"
@@ -19,6 +29,7 @@ ActiveRecord::Schema.define(:version => 20111007054759) do
     t.string   "person_name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "department_id"
   end
 
   create_table "admin_person_activity_relations", :force => true do |t|
@@ -67,6 +78,13 @@ ActiveRecord::Schema.define(:version => 20111007054759) do
   create_table "admin_review_projects", :force => true do |t|
     t.string   "name"
     t.string   "state"
+    t.text     "remark"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "admin_subjects", :force => true do |t|
+    t.string   "name"
     t.text     "remark"
     t.datetime "created_at"
     t.datetime "updated_at"

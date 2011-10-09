@@ -1,0 +1,25 @@
+<h1>Listing admin_subjects</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Remark</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @admin_subjects.each do |admin_subject| %>
+  <tr>
+    <td><%= admin_subject.name %></td>
+    <td><%= admin_subject.remark %></td>
+    <td><%= link_to 'Show', admin_subject %></td>
+    <td><%= link_to 'Edit', edit_admin_subject_path(admin_subject) %></td>
+    <td><%= link_to 'Destroy', admin_subject, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Subject', new_admin_subject_path %>

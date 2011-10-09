@@ -2,10 +2,11 @@ source 'http://rubygems.org'
 
 gem 'rails', '3.1.0'
 
+gem "rake", "0.8.7"
+
 gem 'rack', '1.3.3'
 
 gem 'pg'
-
 
 group :assets do
   gem 'therubyracer'

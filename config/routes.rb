@@ -1,5 +1,10 @@
 LevelReview::Application.routes.draw do
+  namespace :admin do resources :departments end
+
+  namespace :admin do resources :subjects end
+
   namespace :admin do
+    resources :review_projects
     resources :people
     resources :review_activities do
       member do
@@ -13,7 +18,6 @@ LevelReview::Application.routes.draw do
         post 'configure_person_login_time'
       end
     end
-    resources :review_projects
   end
   #活动--参评人信息录入配置 begin
   namespace :admin do
