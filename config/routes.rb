@@ -3,7 +3,11 @@ LevelReview::Application.routes.draw do
   namespace :admin do
     resources :review_projects
     resources :people
-    resources :serial_codes
+    resources :serial_codes do
+      collection do
+        post 'destroy_all'
+      end
+    end
     resources :serial_code_batches
     resources :departments
     resources :subjects
@@ -22,6 +26,8 @@ LevelReview::Application.routes.draw do
         get 'configure_activity_leader_index'
         post 'configure_activity_leader_commit'
         post 'configure_activity_leader_cancel'
+        #生成批次序列码
+        get 'build_activity_codes_index'
       end
     end
   end

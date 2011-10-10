@@ -148,4 +148,16 @@ class Admin::ReviewActivitiesController < ApplicationController
   end
 
   #配置该活动人员 end
+  #配置活动序列码 begin
+  #进入批量序列码生成首页
+  def build_activity_codes_index
+    @admin_review_activity = Admin::ReviewActivity.find(params[:id])
+    @search = Admin::SerialCode.search params[:search]
+    @admin_serial_codes = @search.joins(:batch).
+        where(:admin_serial_code_batches=>{:activity_id.eq=>@admin_review_activity.id}).
+        order('admin_serial_code_batches.build_time desc').
+        order('admin_serial_codes.code desc').
+        paginate(:page => params[:page]);
+  end
+  #配置活动序列码 end
 end

@@ -22,9 +22,12 @@
 
 <p>
   <b>Activity:</b>
-  <%= @admin_serial_code_batch.activity %>
+  <%= @admin_serial_code_batch.activity.name %>
 </p>
-
+<p>
+  <b>序列号数量</b>
+  <%= @admin_serial_code_batch.serial_codes.size %>
+</p>
 
 <%= link_to 'Edit', edit_admin_serial_code_batch_path(@admin_serial_code_batch) %> |
 <%= link_to 'Back', admin_serial_code_batches_path %>

@@ -1,6 +1,19 @@
 <h1>Editing admin_serial_code_batch</h1>
 
-<%= render 'form' %>
+<%= semantic_form_for @admin_serial_code_batch, :validate=>true do |f| %>
+    <%= f.inputs do %>
+        <%= f.input :name, :label=>'激活码批次名称' %>
+        <%= f.input :end_time, :label=>'截止日期' %>
+        <%= f.input :remark, :label=>'说明' %>
+        <%= f.input :activity_id, :as=>:hidden %>
+        批次拥有序列号数量：<%= @admin_serial_code_batch.serial_codes.size %>
+    <% end %>
+
+    <%= f.buttons do %>
+        <%= f.commit_button %>
+    <% end %>
+<% end %>
+
 
 <%= link_to 'Show', @admin_serial_code_batch %> |
 <%= link_to 'Back', admin_serial_code_batches_path %>

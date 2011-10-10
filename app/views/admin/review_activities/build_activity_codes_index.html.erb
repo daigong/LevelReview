@@ -1,0 +1,71 @@
+<%= content_for :javascript do %>
+    <script type="text/javascript">
+        $(function() {
+            $('#delete_serial_code_commit').click(function() {
+                var $serial_code = $('.table_serial_code_id:checked');
+                if ($serial_code.length == 0) {
+                    alert("请选择序列号");
+                    return;
+                }
+                var check_id_array = [];
+                $serial_code.each(function() {
+                    check_id_array.push($(this).val());
+                })
+                $.post('<%= destroy_all_admin_serial_codes_url%>', {ids:check_id_array.join(',')}, function(ids) {
+                    window.location.reload();
+                }, 'json');
+            });
+        });
+    </script>
+<% end %>
+<div>
+  序列码列表
+</div>
+<div>
+  <%= form_for @search, :url=>build_activity_codes_index_admin_review_activity_url do |f| %>
+      <%= f.label :batch_name_contains, "批次名称" %>
+      <%= f.text_field :batch_name_contains %>
+      <%= f.label :code_contains, "序列号" %>
+      <%= f.text_field :code_contains %>
+      <%= f.submit "提交查询" %>
+  <% end %>
+</div>
+<div>
+  <button id="delete_serial_code_commit">删除序列号</button>
+</div>
+<div>
+  <table>
+    <tr>
+      <th>-</th>
+      <th>序列码</th>
+      <th>使用人员</th>
+      <th>使用时间</th>
+      <th>批次信息</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+    <% @admin_serial_codes.each do |admin_serial_code| %>
+        <tr>
+          <td>
+            <%= check_box_tag "table_serial_code_#{admin_serial_code.id}",
+                              admin_serial_code.id,
+                              false,
+                              :class => 'table_serial_code_id' %>
+          </td>
+          <td><%= admin_serial_code.code %></td>
+          <td><%= admin_serial_code.person %></td>
+          <td><%= admin_serial_code.used_time %></td>
+          <td><%= admin_serial_code.batch.name %></td>
+          <td><%= link_to '删除', admin_serial_code, confirm: 'Are you sure?', method: :delete %></td>
+        </tr>
+    <% end %>
+  </table>
+</div>
+<%= will_paginate @admin_serial_codes, {:previous_label => '上一页', :next_label => '下一页'} %>
+<div>
+  <%= link_to '生产序列号', url_for(:action => :new, :controller => 'admin/serial_code_batches', :activity_id=>@admin_review_activity.id) %>
+</div>
+<div>
+  <%= link_to '批次维护', url_for(:action => :index, :controller => 'admin/serial_code_batches', :activity_id=>@admin_review_activity.id) %>
+</div>

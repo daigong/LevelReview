@@ -2,30 +2,29 @@
 
 <table>
   <tr>
-    <th>Name</th>
-    <th>End time</th>
-    <th>Build time</th>
-    <th>Remark</th>
-    <th>Activity</th>
-    <th></th>
+    <th>名称</th>
+    <th>使用截止时间</th>
+    <th>生成时间</th>
+    <th>序列号数量</th>
+    <th>备注</th>
+    <th>所属活动</th>
+    <th>所属项目</th>
     <th></th>
     <th></th>
   </tr>
 
-<% @admin_serial_code_batches.each do |admin_serial_code_batch| %>
-  <tr>
-    <td><%= admin_serial_code_batch.name %></td>
-    <td><%= admin_serial_code_batch.end_time %></td>
-    <td><%= admin_serial_code_batch.build_time %></td>
-    <td><%= admin_serial_code_batch.remark %></td>
-    <td><%= admin_serial_code_batch.activity %></td>
-    <td><%= link_to 'Show', admin_serial_code_batch %></td>
-    <td><%= link_to 'Edit', edit_admin_serial_code_batch_path(admin_serial_code_batch) %></td>
-    <td><%= link_to 'Destroy', admin_serial_code_batch, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-<% end %>
+  <% @admin_serial_code_batches.each do |admin_serial_code_batch| %>
+      <tr>
+        <td><%= admin_serial_code_batch.name %></td>
+        <td><%= admin_serial_code_batch.end_time %></td>
+        <td><%= admin_serial_code_batch.build_time %></td>
+        <td><%= admin_serial_code_batch.serial_codes.size %></td>
+        <td><%= admin_serial_code_batch.remark %></td>
+        <td><%= link_to admin_serial_code_batch.activity.name, admin_serial_code_batch.activity %></td>
+        <td><%= link_to admin_serial_code_batch.activity.review_project.name, admin_serial_code_batch.activity.review_project %></td>
+        <td><%= link_to 'Edit', edit_admin_serial_code_batch_path(admin_serial_code_batch) %></td>
+        <td><%= link_to 'Destroy', admin_serial_code_batch_url(admin_serial_code_batch, :activity_id=>@admin_review_activity.id), confirm: '确定删除?', method: :delete %></td>
+      </tr>
+  <% end %>
 </table>
-
-<br />
-
-<%= link_to 'New Serial code batch', new_admin_serial_code_batch_path %>
+<%= link_to "生成序列号页面", build_activity_codes_index_admin_review_activity_url(@admin_review_activity) %>
