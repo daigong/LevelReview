@@ -1,4 +1,5 @@
 class BaseReview::BaseReviewActivityController < ApplicationController
+  layout 'admin/admin'
   def index
     @admin_review_activity = Admin::ReviewActivity.find params[:id]
   end

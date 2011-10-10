@@ -1,4 +1,6 @@
 class Admin::ReviewProjectsController < ApplicationController
+  #默认使用admin模板
+  layout 'admin/admin'
   # GET /admin/review_projects
   # GET /admin/review_projects.json
   def index

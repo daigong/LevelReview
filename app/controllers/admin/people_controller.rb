@@ -1,4 +1,6 @@
 class Admin::PeopleController < ApplicationController
+  #默认使用admin模板
+  layout 'admin/admin'
   # GET /admin/people
   # GET /admin/people.json
   def index

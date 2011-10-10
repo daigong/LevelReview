@@ -1,5 +1,7 @@
 class Admin::ReviewActivitiesController < ApplicationController
 
+  #默认使用admin模板
+  layout 'admin/admin'
 
   #通过活动类型决定用户到那个页面去定制活动信息
   #定制活动需要配置 /admin/activity_type/ url路径

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>LevelReview</title>
+  <%= stylesheet_link_tag "application" %>
+  <%= yield :stylesheet %>
+  <%= javascript_include_tag "application" %>
+  <%= yield :javascript %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<div>
+  menu1,menu1,menu1,menu1,menu1
+</div>
+<%= yield %>
+</body>
+</html>

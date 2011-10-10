@@ -1,4 +1,8 @@
 class Admin::DepartmentsController < ApplicationController
+  
+  #默认使用admin模板
+  layout 'admin/admin'
+
   # GET /admin/departments
   # GET /admin/departments.json
   def index
