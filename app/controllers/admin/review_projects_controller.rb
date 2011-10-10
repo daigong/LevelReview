@@ -1,4 +1,4 @@
-class Admin::ReviewProjectsController < ApplicationController
+class Admin::ReviewProjectsController < Admin::BaseController
   #默认使用admin模板
   layout 'admin/admin'
   # GET /admin/review_projects

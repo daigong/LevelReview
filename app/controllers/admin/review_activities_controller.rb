@@ -1,4 +1,4 @@
-class Admin::ReviewActivitiesController < ApplicationController
+class Admin::ReviewActivitiesController < Admin::BaseController
 
   #默认使用admin模板
   layout 'admin/admin'

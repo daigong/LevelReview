@@ -1,4 +1,4 @@
-class Admin::SerialCodesController < ApplicationController
+class Admin::SerialCodesController < Admin::BaseController
   #批量删除序列号
   def destroy_all
     ids = params[:ids].split(",");

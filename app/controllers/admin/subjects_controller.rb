@@ -1,4 +1,4 @@
-class Admin::SubjectsController < ApplicationController
+class Admin::SubjectsController < Admin::BaseController
   #默认使用admin模板
   layout 'admin/admin'
   

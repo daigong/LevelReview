@@ -1,4 +1,4 @@
-class Admin::PeopleController < ApplicationController
+class Admin::PeopleController < Admin::BaseController
   #默认使用admin模板
   layout 'admin/admin'
   # GET /admin/people

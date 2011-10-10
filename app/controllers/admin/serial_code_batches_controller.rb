@@ -1,4 +1,4 @@
-class Admin::SerialCodeBatchesController < ApplicationController
+class Admin::SerialCodeBatchesController < Admin::BaseController
   layout 'admin/admin'
   # GET /admin/serial_code_batches
   # GET /admin/serial_code_batches.json

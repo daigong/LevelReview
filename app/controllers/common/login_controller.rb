@@ -13,8 +13,8 @@ class Common::LoginController < ApplicationController
       notice[:message]='用户名密码不匹配！'
       redirect_to :back
     else
-      session[:login_user_id]=login_person.id
-      if 'admin'==login_person.user_name
+      session[:login_user_token]=login_person.id
+      if Admin::BaseController.admin_user_names.include? login_person.user_name
         #管理员页面
         redirect_to :controller => 'admin/admin_index', :action => :index
       else
