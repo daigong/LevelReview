@@ -19,7 +19,7 @@
 </p>
 <div>
   <p>
-    <%= link_to '配置参与人员', configure_people_index_admin_review_activity_url(@admin_review_activity) %>
+    <%= link_to '活动参与人员管理', configure_people_index_admin_review_activity_url(@admin_review_activity) %>
   </p>
 
   <p>
@@ -27,5 +27,5 @@
   </p>
 </div>
 <div>
-  <%= link_to '回到项目', :back %>
+  <%= link_to '回到项目', @admin_review_activity.review_project %>
 </div>
