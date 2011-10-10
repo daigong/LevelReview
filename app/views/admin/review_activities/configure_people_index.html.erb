@@ -72,7 +72,6 @@
 
   <div>
     <%= form_for @search, :url=>configure_people_index_admin_review_activity_url do |f| %>
-        <%= hidden_field_tag :activity_id, params[:id] %>
         <%= f.label :user_name_contains, "用户名" %>
         <%= f.text_field :user_name_contains %>
         <%= f.label :person_name_contains, "人员姓名" %>
@@ -121,6 +120,7 @@
     </table>
   </div>
 </div>
+<%= will_paginate @people, {:previous_label => '上一页', :next_label => '下一页'} %>
 <div>
   <%= link_to "配置人员", configure_people_search_index_admin_review_activity_url(@admin_review_activity) %>
   <%=link_to "回到配置活动", @admin_review_activity %>

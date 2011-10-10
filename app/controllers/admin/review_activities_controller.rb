@@ -31,9 +31,10 @@ class Admin::ReviewActivitiesController < ApplicationController
     @admin_review_activity = Admin::ReviewActivity.find(params[:id])
     params[:search] = {} if params[:search].nil?
     @search = Admin::Person.search params[:search]
+    #子查询查询到已经参加到活动的人的id
     @people = @search.
-        #子查询查询到已经参加到活动的人的id
-    where('admin_people.id in ( select admin_people.id from admin_people inner join admin_person_activity_relations relation on relation.person_id = admin_people.id where relation.activity_id = ? )', @admin_review_activity.id).
+        where('admin_people.id in ( select admin_people.id from admin_people inner join admin_person_activity_relations relation on relation.person_id = admin_people.id where relation.activity_id = ? )', @admin_review_activity.id).
+        order('admin_people.department_id asc').
         paginate(:page => params[:page]);
   end
 
@@ -43,7 +44,9 @@ class Admin::ReviewActivitiesController < ApplicationController
     params[:search] = {} if params[:search].nil?
     @search = Admin::Person.search params[:search]
     #查找当前还没在该活动内的人员
-    @people = @search.paginate(:page => params[:page]);
+    @people = @search.
+        order('admin_people.department_id asc').
+        paginate(:page => params[:page]);
     @people_in_activity = @admin_review_activity.people_in_activity
   end
 
@@ -105,8 +108,15 @@ class Admin::ReviewActivitiesController < ApplicationController
 
   #设置组长页面
   def configure_activity_leader_index
+    params[:search] = {} if params[:search].nil?
+    @search = Admin::Person.search params[:search]
     @admin_review_activity = Admin::ReviewActivity.find(params[:id])
-    @people_in_activity = @admin_review_activity.people_in_activity.paginate(:page => params[:page]);
+    @people_in_activity = @search.
+        joins(:person_activity_relations).
+        where('admin_person_activity_relations.activity_id=?', @admin_review_activity.id).
+        order('admin_people.department_id asc').
+        order('admin_person_activity_relations.is_leader desc').
+        paginate(:page => params[:page]);
   end
 
   #设置组长提交

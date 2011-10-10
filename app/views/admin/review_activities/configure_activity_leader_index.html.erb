@@ -34,6 +34,19 @@
 <% end %>
 <h3>配置组长</h3>
 <div>
+  <%= form_for @search, :url=>configure_activity_leader_index_admin_review_activity_url do |f| %>
+      <%= f.label :user_name_contains, "用户名" %>
+      <%= f.text_field :user_name_contains %>
+      <%= f.label :person_name_contains, "人员姓名" %>
+      <%= f.text_field :person_name_contains %>
+      <%= f.label :department_id_eq, "部门" %>
+      <%= f.select :department_id_eq, departments_options(params[:search][:department_id_eq]), :include_blank=>true %>
+      <%= f.label :department_subject_id_eq, "学科组" %>
+      <%= f.select :department_subject_id_eq, subjects_options(params[:search][:department_subject_id_eq]), :include_blank=>true %>
+      <%= f.submit "查询" %>
+  <% end %>
+</div>
+<div>
   <button id="configure_activity_leader_commit">设置组长</button>
   <button id="configure_activity_leader_cancel">取消组长</button>
 </div>
@@ -59,9 +72,9 @@
           <td><%= admin_person.department.subject.name unless admin_person.department.nil? %></td>
           <td>
             <% if person_is_leader? admin_person, @admin_review_activity %>
-            组长
+                组长
             <% else %>
-            组员
+                组员
             <% end %>
           </td>
           <td><%= person_activity_time admin_person, @admin_review_activity %></td>
@@ -71,9 +84,7 @@
     <% end %>
   </table>
 </div>
-<div>
-  分页
-</div>
+<%= will_paginate @people_in_activity, {:previous_label => '上一页', :next_label => '下一页'} %>
 <div>
   <%= link_to "回退", @admin_review_activity %>
   <%= link_to "配置人员", configure_people_index_admin_review_activity_url(@admin_review_activity) %>
