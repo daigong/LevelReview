@@ -1,0 +1,12 @@
+<%= semantic_form_for @admin_serial_code,:validate=>true do |f| %>
+  <%= f.inputs do %>
+    <%= f.input :code %>
+    <%= f.input :person %>
+    <%= f.input :used_time %>
+    <%= f.input :batch %>
+  <% end %>
+
+  <%= f.buttons do %>
+    <%= f.commit_button %>
+  <% end %>
+<% end %>

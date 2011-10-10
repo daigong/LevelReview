@@ -1,11 +1,12 @@
 LevelReview::Application.routes.draw do
-  namespace :admin do resources :departments end
-
-  namespace :admin do resources :subjects end
 
   namespace :admin do
     resources :review_projects
     resources :people
+    resources :serial_codes
+    resources :serial_code_batches
+    resources :departments
+    resources :subjects
     resources :review_activities do
       member do
         #配置人员

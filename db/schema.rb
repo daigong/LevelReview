@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111009124502) do
+ActiveRecord::Schema.define(:version => 20111010021305) do
 
   create_table "admin_departments", :force => true do |t|
     t.string   "name"
@@ -83,6 +83,30 @@ ActiveRecord::Schema.define(:version => 20111009124502) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "admin_serial_code_batches", :force => true do |t|
+    t.string   "name"
+    t.datetime "end_time"
+    t.datetime "build_time"
+    t.text     "remark"
+    t.integer  "activity_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "admin_serial_code_batches", ["activity_id"], :name => "index_admin_serial_code_batches_on_activity_id"
+
+  create_table "admin_serial_codes", :force => true do |t|
+    t.string   "code"
+    t.integer  "person_id"
+    t.datetime "used_time"
+    t.integer  "batch_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "admin_serial_codes", ["batch_id"], :name => "index_admin_serial_codes_on_batch_id"
+  add_index "admin_serial_codes", ["person_id"], :name => "index_admin_serial_codes_on_person_id"
 
   create_table "admin_subjects", :force => true do |t|
     t.string   "name"

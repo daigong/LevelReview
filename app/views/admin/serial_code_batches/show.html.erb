@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @admin_serial_code_batch.name %>
+</p>
+
+<p>
+  <b>End time:</b>
+  <%= @admin_serial_code_batch.end_time %>
+</p>
+
+<p>
+  <b>Build time:</b>
+  <%= @admin_serial_code_batch.build_time %>
+</p>
+
+<p>
+  <b>Remark:</b>
+  <%= @admin_serial_code_batch.remark %>
+</p>
+
+<p>
+  <b>Activity:</b>
+  <%= @admin_serial_code_batch.activity %>
+</p>
+
+
+<%= link_to 'Edit', edit_admin_serial_code_batch_path(@admin_serial_code_batch) %> |
+<%= link_to 'Back', admin_serial_code_batches_path %>
