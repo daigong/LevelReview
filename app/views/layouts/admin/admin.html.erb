@@ -10,7 +10,10 @@
 </head>
 <body>
 <div>
-  menu1,menu1,menu1,menu1,menu1
+  菜单:
+  <%= link_to "新建评选项目", new_admin_review_project_path %>、
+  <%= link_to "评选项目维护", admin_review_projects_path %>
+  、系统人员维护、密码修改
 </div>
 <%= yield %>
 </body>
