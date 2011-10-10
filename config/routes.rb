@@ -1,7 +1,8 @@
 LevelReview::Application.routes.draw do
   #首页为登录页面
-  root :to=>'common/login#login'
+  root :to=>'common/login#login',:as=>'login'
   post '/login_commit'=>'common/login#login_commit', :as=>'login_commit'
+  match '/login_out'=>'common/login#login_out', :as=>'login_out'
   #用户空间
   match '/user_zone/:action'=>'user_zone/zone_index'
   #登录URL配置

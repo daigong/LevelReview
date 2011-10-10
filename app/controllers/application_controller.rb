@@ -9,6 +9,6 @@ class ApplicationController < ActionController::Base
   end
   #用户是否登录
   def login?
-    return login_user.nil?
+    return !login_user.nil?
   end
 end

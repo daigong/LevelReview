@@ -10,7 +10,7 @@ class Common::LoginController < ApplicationController
     admin_person = params[:admin_person];
     login_person = Admin::Person.find_by_user_name_and_password(admin_person[:user_name], admin_person[:password]);
     if login_person.nil?
-      notice[:message]='用户名密码不匹配！'
+      flash[:notice]='用户名密码不匹配！'
       redirect_to :back
     else
       session[:login_user_token]=login_person.id
@@ -22,5 +22,14 @@ class Common::LoginController < ApplicationController
         redirect_to :controller => 'user_zone/zone_index', :action => :index
       end
     end
+  end
+
+  #处理登出
+  def login_out
+    if login?
+      session[:login_user_token]=nil
+      flash[:notice]="您已经成功登出！"
+    end
+    redirect_to login_url
   end
 end

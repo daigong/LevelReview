@@ -1,10 +1,15 @@
 class Admin::BaseController < ApplicationController
 
-  before_filter :check_admin_login?
+  before_filter :not_login_to_login_page
+
+  def not_login_to_login_page
+    redirect_to login_url unless check_admin_login?
+  end
+
   #检查是否是管理员用户
   def check_admin_login?
     admin_user = login_user
-    return false if admin_user.nil?
+    return false if admin_user.nil?||!admin_user
     if  Admin::BaseController.admin_user_names.include? admin_user.user_name
       return true
     else

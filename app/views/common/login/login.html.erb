@@ -1,7 +1,10 @@
+<div>
+  <%= flash[:notice] %>
+</div>
 <%= form_for @person, :url=>login_commit_path do |f| %>
     <%= f.label :user_name, "用户名" %>
     <%= f.text_field :user_name %>
     <%= f.label :password, "密码" %>
-    <%= f.text_field :password %>
+    <%= f.password_field :password %>
     <%= f.submit "登录" %>
 <% end %>
