@@ -1,0 +1,2 @@
+module UserZone::ZoneIndexHelper
+end

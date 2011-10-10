@@ -1,6 +1,15 @@
 LevelReview::Application.routes.draw do
-
+  #首页为登录页面
+  root :to=>'common/login#login'
+  post '/login_commit'=>'common/login#login_commit', :as=>'login_commit'
+  #用户空间
+  match '/user_zone/:action'=>'user_zone/zone_index'
+  #登录URL配置
+  #管理配置
   namespace :admin do
+    #管理员首页
+    match '/user_zone/:action/'=>'admin_index'
+    #相关资源配置
     resources :review_projects
     resources :people
     resources :serial_codes do
