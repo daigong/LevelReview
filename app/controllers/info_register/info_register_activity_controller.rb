@@ -4,5 +4,4 @@ class InfoRegister::InfoRegisterActivityController < Admin::BaseController
   def index
     @admin_review_activity = Admin::ReviewActivity.find params[:id]
   end
-
 end
