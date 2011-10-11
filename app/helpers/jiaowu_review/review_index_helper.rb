@@ -1,0 +1,2 @@
+module JiaowuReview::ReviewIndexHelper
+end

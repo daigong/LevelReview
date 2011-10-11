@@ -1,2 +1,2 @@
-class RenshiReview::ReviewActivityController < Common::ReviewActivityBaseController
+class RenshiReview::ReviewActivityController < BaseReview::ReviewActivityBaseController
 end

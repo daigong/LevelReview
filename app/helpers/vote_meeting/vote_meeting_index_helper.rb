@@ -1,0 +1,2 @@
+module VoteMeeting::VoteMeetingIndexHelper
+end

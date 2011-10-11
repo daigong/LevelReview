@@ -1,3 +1,4 @@
+#参与活动的基类
 class Common::JoinActivityBaseController < ApplicationController
   before_filter :check_redirect_login_page
   #检查登录器

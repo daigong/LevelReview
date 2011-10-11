@@ -1,0 +1,2 @@
+module SubjectMeeting::SubjectMeetingIndexHelper
+end

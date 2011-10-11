@@ -1,4 +1,6 @@
 LevelReview::Application.routes.draw do
+  get "vote_meeting_index/index"
+
   #首页为登录页面
   root :to=>'common/login#login', :as=>'login'
   post '/login_commit'=>'common/login#login_commit', :as=>'login_commit'
@@ -48,9 +50,13 @@ LevelReview::Application.routes.draw do
   end
 
   namespace :info_register do
-    #resources :people do
-      #resources :paper
-    #end
+    #带有活动id的
+    scope :path=>':activity_id' do
+      #跳转到信息录入首页
+      get 'index' => 'InfoRegisterIndex#index', :as=>:index
+      #resources :people do
+      #end
+    end
   end
   #活动--参评人信息录入配置 end
   #活动--部门审核 begin
@@ -59,7 +65,10 @@ LevelReview::Application.routes.draw do
   end
 
   namespace :department_review do
-
+    scope :path=>':activity_id' do
+      #活动首页
+      get 'index' => 'ReviewIndex#index', :as=>:index
+    end
   end
   #活动--部门审核 end
   #活动--教务审核 begin
@@ -68,7 +77,10 @@ LevelReview::Application.routes.draw do
   end
 
   namespace :jiaowu_review do
-
+    scope :path=>':activity_id' do
+      #活动首页
+      get 'index' => 'ReviewIndex#index', :as=>:index
+    end
   end
   #活动--教务审核 end
 
@@ -78,7 +90,10 @@ LevelReview::Application.routes.draw do
   end
 
   namespace :keyan_review do
-
+    scope :path=>':activity_id' do
+      #活动首页
+      get 'index' => 'ReviewIndex#index', :as=>:index
+    end
   end
   #活动--科研审核 end
   #活动--人事审核 begin
@@ -87,7 +102,10 @@ LevelReview::Application.routes.draw do
   end
 
   namespace :renshi_review do
-
+    scope :path=>':activity_id' do
+      #活动首页
+      get 'index' => 'ReviewIndex#index', :as=>:index
+    end
   end
   #活动--人事审核 end
   #活动--评委会 begin
@@ -96,7 +114,10 @@ LevelReview::Application.routes.draw do
   end
 
   namespace :vote_meeting do
-
+    scope :path=>':activity_id' do
+      #活动首页
+      get 'index' => 'VoteMeetingIndex#index', :as=>:index
+    end
   end
   #活动--评委会 end
   #活动--学科组 begin
@@ -105,7 +126,10 @@ LevelReview::Application.routes.draw do
   end
 
   namespace :subject_meeting do
-
+    scope :path=>':activity_id' do
+      #活动首页
+      get 'index' => 'SubjectMeetingIndex#index', :as=>:index
+    end
   end
   #活动--学科组 end
   # The priority is based upon order of creation:
