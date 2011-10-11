@@ -1,2 +1,2 @@
-class JiaowuReview::ReviewActivityController < BaseReview::BaseReviewActivityController
+class JiaowuReview::ReviewActivityController < Common::ReviewActivityBaseController
 end

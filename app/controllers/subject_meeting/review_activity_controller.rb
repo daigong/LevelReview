@@ -1,2 +1,2 @@
-class SubjectMeeting::ReviewActivityController < BaseReview::BaseReviewActivityController
+class SubjectMeeting::ReviewActivityController < Common::ReviewActivityBaseController
 end

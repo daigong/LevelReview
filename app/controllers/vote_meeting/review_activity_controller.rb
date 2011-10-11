@@ -1,4 +1,4 @@
-class VoteMeeting::ReviewActivityController < BaseReview::BaseReviewActivityController
+class VoteMeeting::ReviewActivityController < Common::ReviewActivityBaseController
   def index
     @admin_review_activity = Admin::ReviewActivity.find params[:id]
   end

@@ -1,8 +1,8 @@
 class Admin::BaseController < ApplicationController
 
-  before_filter :not_login_to_login_page
+  before_filter :check_redirect_login_page
 
-  def not_login_to_login_page
+  def check_redirect_login_page
     redirect_to login_url unless check_admin_login?
   end
 

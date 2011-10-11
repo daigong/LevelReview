@@ -1,2 +1,2 @@
-class KeyanReview::ReviewActivityController < BaseReview::BaseReviewActivityController
+class KeyanReview::ReviewActivityController < Common::ReviewActivityBaseController
 end

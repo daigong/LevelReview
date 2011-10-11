@@ -1,6 +1,6 @@
 LevelReview::Application.routes.draw do
   #首页为登录页面
-  root :to=>'common/login#login',:as=>'login'
+  root :to=>'common/login#login', :as=>'login'
   post '/login_commit'=>'common/login#login_commit', :as=>'login_commit'
   match '/login_out'=>'common/login#login_out', :as=>'login_out'
   #用户空间
@@ -48,7 +48,9 @@ LevelReview::Application.routes.draw do
   end
 
   namespace :info_register do
-
+    #resources :people do
+      #resources :paper
+    #end
   end
   #活动--参评人信息录入配置 end
   #活动--部门审核 begin

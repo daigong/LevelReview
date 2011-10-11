@@ -1,0 +1,2 @@
+module InfoRegister::BaseHelper
+end
