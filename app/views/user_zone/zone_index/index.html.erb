@@ -1,1 +1,8 @@
-用户进入首页
+<div>
+  用户首页
+</div>
+<div>
+  <% @activities.each do |activity| %>
+      <%= activity.name %>
+  <% end %>
+</div>

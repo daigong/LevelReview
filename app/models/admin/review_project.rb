@@ -39,7 +39,7 @@ class Admin::ReviewProject < ActiveRecord::Base
     info_register_activity.review_project=project
     info_register_activity.name="参评资料录入";
     info_register_activity.begin_time=DateTime.now
-    info_register_activity.end_time=DateTime.now
+    info_register_activity.end_time=DateTime.now + 10.day
     info_register_activity.activity_type="info_register"
     info_register_activity.save
     #活动2.部门审核 activity_type:department_review

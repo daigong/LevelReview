@@ -1,6 +1,12 @@
 class Admin::Person < ActiveRecord::Base
   belongs_to :department, :class_name => 'Admin::Department'
   has_many :person_activity_relations, :class_name => 'Admin::PersonActivityRelation', :foreign_key => :person_id
+  #活动人员参加的所有活动
+  def activities
+    Admin::ReviewActivity.joins { :person_activity_relations }.
+        where ( {:person_activity_relations=>{:person_id=>self.id}} )
+  end
+
   #判定人员是否在指定活动中
   def in_activity? admin_review_activity
     people_in_activity = admin_review_activity.people_in_activity
@@ -71,5 +77,25 @@ class Admin::Person < ActiveRecord::Base
     relation.is_leader=is_leader
     relation.save
     return true;
+  end
+
+  #获得现在可以参与的活动
+  #根据活动时间、人员特殊时间设置判断
+  def now_can_join_activities
+    #排除掉活动时间已经过了的
+    activities.select do |activity|
+      now_can_join_activity? activity
+    end
+  end
+
+  #判定人员是否可以参与到某个活动中（是否人员与活动产生关系，同时人员是否在可登录时间内，包括特殊时间的设置）
+  #activity 活动
+  def now_can_join_activity? activity
+    activity_relation = Admin::PersonActivityRelation.
+        find_by_person_id_and_activity_id self.id, activity.id
+    return false if activity_relation.nil?
+    now_date_time = DateTime.now
+    return true if Admin::ReviewActivity.can_login_by_rule? now_date_time, activity_relation.login_begin_time, activity_relation.login_end_time
+    return Admin::ReviewActivity.can_login_by_rule? now_date_time, activity.begin_time, activity.end_time
   end
 end
