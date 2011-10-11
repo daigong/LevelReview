@@ -1,4 +1,4 @@
-class KeyanReview::ReviewIndexController < Common::JoinActivityBaseController
+class KeyanReview::ReviewIndexController < KeyanReview::BaseController
   def index
 
   end

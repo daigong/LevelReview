@@ -1,0 +1,2 @@
+module VoteMeeting::BaseHelper
+end

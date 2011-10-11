@@ -1,0 +1,2 @@
+module DepartmentReview::BaseHelper
+end

@@ -1,0 +1,2 @@
+module KeyanReview::BaseHelper
+end

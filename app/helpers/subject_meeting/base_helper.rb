@@ -1,0 +1,2 @@
+module SubjectMeeting::BaseHelper
+end

@@ -1,4 +1,5 @@
-class VoteMeeting::VoteMeetingIndexController < Common::JoinActivityBaseController
+class VoteMeeting::VoteMeetingIndexController < VoteMeeting::BaseController
   def index
+
   end
 end

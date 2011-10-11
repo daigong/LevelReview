@@ -1,4 +1,4 @@
-class SubjectMeeting::SubjectMeetingIndexController < Common::JoinActivityBaseController
+class SubjectMeeting::SubjectMeetingIndexController < SubjectMeeting::BaseController
   def index
 
   end

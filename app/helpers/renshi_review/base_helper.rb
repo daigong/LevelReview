@@ -1,0 +1,2 @@
+module RenshiReview::BaseHelper
+end

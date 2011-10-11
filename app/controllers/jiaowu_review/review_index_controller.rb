@@ -1,4 +1,4 @@
-class JiaowuReview::ReviewIndexController < Common::JoinActivityBaseController
+class JiaowuReview::ReviewIndexController < JiaowuReview::BaseController
   def index
 
   end

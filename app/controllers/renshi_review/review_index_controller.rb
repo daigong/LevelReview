@@ -1,4 +1,4 @@
-class RenshiReview::ReviewIndexController < Common::JoinActivityBaseController
+class RenshiReview::ReviewIndexController < RenshiReview::BaseController
   def index
     
   end

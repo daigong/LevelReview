@@ -1,4 +1,4 @@
-class DepartmentReview::ReviewIndexController < Common::JoinActivityBaseController
+class DepartmentReview::ReviewIndexController < DepartmentReview::BaseController
   def index
 
   end
