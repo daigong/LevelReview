@@ -1,4 +1,4 @@
-class UserZone::ZoneIndexController < ApplicationController
+class UserZone::ZoneIndexController < Common::LoginSystemBaseController
   #用户空间模板
   layout 'user_zone/user_zone'
   #用户首页

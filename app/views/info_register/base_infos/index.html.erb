@@ -1,0 +1,49 @@
+<h1>Listing info_register_base_infos</h1>
+
+<table>
+  <tr>
+    <th>Nation</th>
+    <th>Sex</th>
+    <th>Birthday</th>
+    <th>Last review time</th>
+    <th>Invite time</th>
+    <th>Degree</th>
+    <th>Edu background</th>
+    <th>Current level</th>
+    <th>Advance level</th>
+    <th>Review type</th>
+    <th>Computer exam</th>
+    <th>Computer exam file name</th>
+    <th>Foreign exam</th>
+    <th>Foreign exam file name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @info_register_base_infos.each do |info_register_base_info| %>
+  <tr>
+    <td><%= info_register_base_info.nation %></td>
+    <td><%= info_register_base_info.sex %></td>
+    <td><%= info_register_base_info.birthday %></td>
+    <td><%= info_register_base_info.last_review_time %></td>
+    <td><%= info_register_base_info.invite_time %></td>
+    <td><%= info_register_base_info.degree %></td>
+    <td><%= info_register_base_info.edu_background %></td>
+    <td><%= info_register_base_info.current_level %></td>
+    <td><%= info_register_base_info.advance_level %></td>
+    <td><%= info_register_base_info.review_type %></td>
+    <td><%= info_register_base_info.computer_exam %></td>
+    <td><%= info_register_base_info.computer_exam_file_name %></td>
+    <td><%= info_register_base_info.foreign_exam %></td>
+    <td><%= info_register_base_info.foreign_exam_file_name %></td>
+    <td><%= link_to 'Show', info_register_base_info %></td>
+    <td><%= link_to 'Edit', edit_info_register_base_info_path(info_register_base_info) %></td>
+    <td><%= link_to 'Destroy', info_register_base_info, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Base info', new_info_register_base_info_path %>

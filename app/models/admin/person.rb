@@ -1,10 +1,11 @@
 class Admin::Person < ActiveRecord::Base
   belongs_to :department, :class_name => 'Admin::Department'
   has_many :person_activity_relations, :class_name => 'Admin::PersonActivityRelation', :foreign_key => :person_id
+  has_one :base_info, :class_name => 'InfoRegister::BaseInfo', :foreign_key => :owner_id
   #活动人员参加的所有活动
   def activities
     Admin::ReviewActivity.joins { :person_activity_relations }.
-        where ( {:person_activity_relations=>{:person_id=>self.id}} )
+        where ({:person_activity_relations=>{:person_id=>self.id}})
   end
 
   #判定人员是否在指定活动中

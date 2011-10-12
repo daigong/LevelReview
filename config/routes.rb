@@ -1,4 +1,5 @@
 LevelReview::Application.routes.draw do
+
   get "vote_meeting_index/index"
 
   #首页为登录页面
@@ -54,8 +55,8 @@ LevelReview::Application.routes.draw do
     scope :path=>':activity_id' do
       #跳转到信息录入首页
       get 'index' => 'InfoRegisterIndex#index', :as=>:index
-      #resources :people do
-      #end
+      #人员基本信息
+      resources :base_infos
     end
   end
   #活动--参评人信息录入配置 end

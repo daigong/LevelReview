@@ -1,11 +1,9 @@
 #参与活动的基类
-class Common::JoinActivityBaseController < ApplicationController
-  before_filter :check_redirect_login_page, :check_login_time_redirect_user_zone_index
+#配置了活动的时间检查
+class Common::JoinActivityBaseController < Common::LoginSystemBaseController
+  before_filter :check_login_time_redirect_user_zone_index
 
-  #检查登录
-  def check_redirect_login_page
-    redirect_to login_url unless login?
-  end
+  helper_method :curr_activity
 
   #检查登录时间
   def check_login_time_redirect_user_zone_index

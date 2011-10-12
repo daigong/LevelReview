@@ -10,7 +10,8 @@
 </head>
 <body>
 <div>
-  基本信息录入，论文....
+  <%= link_to '基本信息录入',info_register_base_info_path(curr_activity,1) %>
+  ，论文....
   <%= link_to "登出", login_out_url %>
 </div>
 <%= yield %>
