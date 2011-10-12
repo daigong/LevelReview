@@ -18,6 +18,7 @@ class InfoRegister::BaseInfosController < InfoRegister::BaseController
 
   def edit
     @info_register_base_info = login_user.base_info
+    @admin_person = login_user
   end
 
   def update
