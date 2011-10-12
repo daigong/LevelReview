@@ -1,34 +1,31 @@
+#encoding=utf-8
+#基本信息录入
 class InfoRegister::BaseInfosController < InfoRegister::BaseController
 
-  # GET /info_register/base_infos/1
-  # GET /info_register/base_infos/1.json
-  def show
-    @info_register_base_info = InfoRegister::BaseInfo.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @info_register_base_info }
+  def new
+    if login_user.base_info.nil?
+      #如果还没有填写过基本信息,new一个,save进去,然后以后的都是修改操作
+      @info_register_base_info = InfoRegister::BaseInfo.new
+      @info_register_base_info.owner=login_user
+      login_user.base_info=@info_register_base_info
+      @info_register_base_info.save!(:validate => false)
+    else
+      @info_register_base_info = login_user.base_info
     end
+
+    redirect_to edit_info_register_base_info_path(curr_activity, @info_register_base_info);
   end
 
-  # GET /info_register/base_infos/1/edit
   def edit
-    @info_register_base_info = InfoRegister::BaseInfo.find(params[:id])
+    @info_register_base_info = login_user.base_info
   end
 
-  # PUT /info_register/base_infos/1
-  # PUT /info_register/base_infos/1.json
   def update
     @info_register_base_info = InfoRegister::BaseInfo.find(params[:id])
-
-    respond_to do |format|
-      if @info_register_base_info.update_attributes(params[:info_register_base_info])
-        format.html { redirect_to @info_register_base_info, notice: 'Base info was successfully updated.' }
-        format.json { head :ok }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @info_register_base_info.errors, status: :unprocessable_entity }
-      end
+    if @info_register_base_info.update_attributes(params[:info_register_base_info])
+      flash[:notice]='填写成功'
     end
+    redirect_to edit_info_register_base_info_path(curr_activity, @info_register_base_info);
   end
+
 end

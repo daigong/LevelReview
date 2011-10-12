@@ -1,4 +1,4 @@
-class Admin::BaseController < ApplicationController
+class Admin::BaseController < Common::LoginSystemBaseController
 
   before_filter :check_redirect_login_page
 

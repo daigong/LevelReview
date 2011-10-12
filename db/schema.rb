@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111010021305) do
+ActiveRecord::Schema.define(:version => 20111012061412) do
 
   create_table "admin_departments", :force => true do |t|
     t.string   "name"
@@ -111,6 +111,26 @@ ActiveRecord::Schema.define(:version => 20111010021305) do
   create_table "admin_subjects", :force => true do |t|
     t.string   "name"
     t.text     "remark"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "info_register_base_infos", :force => true do |t|
+    t.string   "nation"
+    t.string   "sex"
+    t.string   "birthday"
+    t.string   "last_review_time"
+    t.string   "invite_time"
+    t.string   "degree"
+    t.string   "edu_background"
+    t.string   "current_level"
+    t.string   "advance_level"
+    t.string   "review_type"
+    t.string   "computer_exam"
+    t.string   "computer_exam_file_name"
+    t.string   "foreign_exam"
+    t.string   "foreign_exam_file_name"
+    t.integer  "owner_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

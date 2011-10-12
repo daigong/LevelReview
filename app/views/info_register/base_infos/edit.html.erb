@@ -1,6 +1,28 @@
-<h1>Editing info_register_base_info</h1>
+<h3>基本信息</h3>
+<%= semantic_form_for @info_register_base_info,
+                      :url=> info_register_base_info_path(curr_activity, @info_register_base_info),
+                      :validate=>true do |f| %>
+    <%= f.inputs do %>
+        <%= f.input :nation, :label=>'民族' %>
+        <%= f.input :sex, :label=>'性别' %>
+        <%= f.input :birthday, :label=>'出生年月' %>
+        <%= f.input :last_review_time, :label=>'评审时间' %>
+        <%= f.input :invite_time, :label=>'聘任时间' %>
+        <%= f.input :degree, :label=>'学位' %>
+        <%= f.input :edu_background, :label=>'学历' %>
+        <%= f.input :current_level, :label=>'当前级别' %>
+        <%= f.input :advance_level, :label=>'晋升级别' %>
+        <%= f.input :review_type, :label=>'评审类型' %>
+        <%= f.input :computer_exam, :label=>'计算机考试' %>
+        <%= f.input :computer_exam_file_name %>
+        <%= f.input :foreign_exam, :label=>'外语考试' %>
+        <%= f.input :foreign_exam_file_name %>
+    <% end %>
 
-<%= render 'form' %>
+    <%= f.buttons do %>
+        <%= f.commit_button :label=>"保存" %>
+    <% end %>
+<% end %>
 
-<%= link_to 'Show', @info_register_base_info %> |
-<%= link_to 'Back', info_register_base_infos_path %>
+
+
