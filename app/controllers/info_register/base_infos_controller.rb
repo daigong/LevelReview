@@ -7,7 +7,6 @@ class InfoRegister::BaseInfosController < InfoRegister::BaseController
       #如果还没有填写过基本信息,new一个,save进去,然后以后的都是修改操作
       @info_register_base_info = InfoRegister::BaseInfo.new
       @info_register_base_info.owner=login_user
-      login_user.base_info=@info_register_base_info
       @info_register_base_info.save!(:validate => false)
     else
       @info_register_base_info = login_user.base_info
