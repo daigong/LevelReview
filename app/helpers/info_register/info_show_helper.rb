@@ -1,0 +1,2 @@
+module InfoRegister::InfoShowHelper
+end

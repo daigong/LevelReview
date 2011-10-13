@@ -9,6 +9,9 @@
 <% end %>
 
 <% @people.each do |person| %>
-    <%= person.person_name %> <br/>
+    <%= person.person_name %>
+    <%= link_to "查看信息", department_review_info_show_path(curr_activity, person) %>
+    <br/>
 <% end %>
+
 <%= will_paginate @people, {:previous_label => '上一页', :next_label => '下一页'} %>

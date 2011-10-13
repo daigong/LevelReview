@@ -53,6 +53,8 @@ LevelReview::Application.routes.draw do
     scope :path=>':activity_id' do
       #跳转到信息录入首页
       get 'index' => 'InfoRegisterIndex#index', :as=>:index
+      #参评人信息显示
+      get 'info_show'=>'InfoShow#show_person_register_info',:as=>:info_show
       #人员基本信息
       resources :base_infos
       resources :articles
@@ -70,6 +72,8 @@ LevelReview::Application.routes.draw do
       get 'index' => 'ReviewIndex#index', :as=>:index
       #信息审阅
       get 'info_review/index'=>'InfoReview#index', :as=>:info_review_index
+      #参评人信息显示
+      get 'info_show/:person_id'=>'InfoShow#show_person_register_info',:as=>:info_show
     end
   end
   #活动--部门审核 end
