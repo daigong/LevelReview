@@ -10,18 +10,18 @@
     <th></th>
   </tr>
 
-<% @admin_review_projects.each do |admin_review_project| %>
-  <tr>
-    <td><%= admin_review_project.name %></td>
-    <td><%= admin_review_project.state %></td>
-    <td><%= admin_review_project.remark %></td>
-    <td><%= link_to 'Show', admin_review_project %></td>
-    <td><%= link_to 'Edit', edit_admin_review_project_path(admin_review_project) %></td>
-    <td><%= link_to 'Destroy', admin_review_project, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-<% end %>
+  <% @admin_review_projects.each do |admin_review_project| %>
+      <tr>
+        <td><%= admin_review_project.name %></td>
+        <td><%= admin_review_project.state %></td>
+        <td><%= admin_review_project.remark %></td>
+        <td><%= link_to 'Show', admin_review_project %></td>
+        <td><%= link_to 'Edit', edit_admin_review_project_path(admin_review_project) %></td>
+        <td><%= link_to 'Destroy', admin_review_project, confirm: 'Are you sure?', method: :delete %></td>
+      </tr>
+  <% end %>
 </table>
 
-<br />
+<br/>
 
 <%= link_to 'New Review project', new_admin_review_project_path %>

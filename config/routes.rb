@@ -7,7 +7,7 @@ LevelReview::Application.routes.draw do
   post '/login_commit'=>'common/login#login_commit', :as=>'login_commit'
   match '/login_out'=>'common/login#login_out', :as=>'login_out'
   #用户空间
-  match '/user_zone/:action'=>'user_zone/zone_index',:as=>'user_zone_index'
+  match '/user_zone/:action'=>'user_zone/zone_index', :as=>'user_zone_index'
   #登录URL配置
   #管理配置
   namespace :admin do

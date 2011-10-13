@@ -3,7 +3,7 @@
 <%= semantic_form_for @admin_serial_code_batch, :validate=>true do |f| %>
     <%= f.inputs do %>
         <%= f.input :name, :label=>'激活码批次名称' %>
-        <%= label_tag :build_count,"生成数量" %>
+        <%= label_tag :build_count, "生成数量" %>
         <%= text_field_tag :build_count %>
         <%= f.input :end_time, :label=>'截止日期' %>
         <%= f.input :remark, :label=>'说明' %>

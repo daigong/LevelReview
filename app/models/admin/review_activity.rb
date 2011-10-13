@@ -1,6 +1,6 @@
 class Admin::ReviewActivity < ActiveRecord::Base
   belongs_to :review_project
-  has_many :person_activity_relations,:class_name => 'Admin::PersonActivityRelation',:foreign_key => :activity_id
+  has_many :person_activity_relations, :class_name => 'Admin::PersonActivityRelation', :foreign_key => :activity_id
   #提供系统一个时间判断规则函数
   def self.can_login_by_rule? now_time, begin_time, end_time
     if begin_time.nil?&&end_time.nil?

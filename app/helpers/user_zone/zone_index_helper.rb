@@ -13,7 +13,7 @@ module UserZone::ZoneIndexHelper
     #   end
     link_to_method = "#{activity.activity_type}_index_url"
     if respond_to? link_to_method
-      link_to activity.name, send(link_to_method,activity)
+      link_to activity.name, send(link_to_method, activity)
     else
       "没有合适的链接，请核实."
     end

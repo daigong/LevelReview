@@ -1,20 +1,11 @@
-<%= content_for :javascript do %>
-    <script type="text/javascript">
-        $(function() {
-            var validators = window['edit_info_register_base_info_1'].validators
-            //增加验证规则
-            validators["person_name"] = {"presence":{"message":"\u8be5\u5b57\u6bb5\u4e0d\u80fd\u4e3a\u7a7a"}}
-            validators["department_id"] = {"presence":{"message":"\u8be5\u5b57\u6bb5\u4e0d\u80fd\u4e3a\u7a7a"}}
-        });
-    </script>
-<% end %>
 <h3>基本信息</h3>
 <%= semantic_form_for @info_register_base_info,
                       :url=> info_register_base_info_path(curr_activity, @info_register_base_info),
                       :validate=>true do |f| %>
-    <%= f.inputs do %>
-        <%= semantic_extra_input :person_name, :label=>'姓名', :value=>@info_register_base_info.owner.person_name %>
-        <%= semantic_extra_select :department_id, department_options(@info_register_base_info.owner.department.id), :label=>'部门' %>
+    <%= f.inputs :name=>'个人基本信息录入' do %>
+        <%= semantic_extra_input :person_name, :label=>'姓名', :class=>'required', :value=>@info_register_base_info.owner.person_name %>
+        <%= semantic_extra_select :department_id, department_options(@info_register_base_info.owner.department.id),
+                                  :label=>'部门', :class=>'required' %>
         <%= f.input :nation, :label=>'民族' %>
         <%= f.input :sex, :label=>'性别' %>
         <%= f.input :birthday, :label=>'出生年月' %>

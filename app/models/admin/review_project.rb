@@ -7,8 +7,7 @@ class Admin::ReviewProject < ActiveRecord::Base
     info_register_activity = Admin::ReviewActivity.
         find_by_review_project_id_and_activity_type(self, 'info_register');
     activities<<info_register_activity
-    department_review_activity = Admin::ReviewActivity
-    .find_by_review_project_id_and_activity_type(self, 'department_review');
+    department_review_activity = Admin::ReviewActivity.find_by_review_project_id_and_activity_type(self, 'department_review');
     activities<<department_review_activity
     jiaowu_review_activity = Admin::ReviewActivity.
         find_by_review_project_id_and_activity_type(self, 'jiaowu_review');

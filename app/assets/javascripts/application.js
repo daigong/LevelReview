@@ -7,4 +7,5 @@
 //= require jquery
 //= require jquery_ujs
 //= require rails.validations
-//= require_tree .
+//= require application/semantic_form_extra_rule
+

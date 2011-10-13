@@ -1,7 +1,7 @@
 class Admin::SubjectsController < Admin::BaseController
   #默认使用admin模板
   layout 'admin/admin'
-  
+
   # GET /admin/subjects
   # GET /admin/subjects.json
   def index
