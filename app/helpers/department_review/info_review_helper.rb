@@ -1,0 +1,2 @@
+module DepartmentReview::InfoReviewHelper
+end

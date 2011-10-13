@@ -10,7 +10,8 @@
 </head>
 <body>
 <div>
-  部门审核，部门内排序
+  <%= link_to "部门审核", department_review_info_review_index_url(curr_activity) %>
+  ，部门内排序
   <%= link_to "登出", login_out_url %>
 </div>
 <%= yield %>

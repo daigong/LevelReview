@@ -1,5 +1,5 @@
 LevelReview::Application.routes.draw do
-  
+
   #首页为登录页面
   root :to=>'common/login#login', :as=>'login'
   post '/login_commit'=>'common/login#login_commit', :as=>'login_commit'
@@ -68,6 +68,8 @@ LevelReview::Application.routes.draw do
     scope :path=>':activity_id' do
       #活动首页
       get 'index' => 'ReviewIndex#index', :as=>:index
+      #信息审阅
+      get 'info_review/index'=>'InfoReview#index', :as=>:info_review_index
     end
   end
   #活动--部门审核 end

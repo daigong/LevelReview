@@ -2,6 +2,7 @@ class Admin::Person < ActiveRecord::Base
   belongs_to :department, :class_name => 'Admin::Department'
   has_many :person_activity_relations, :class_name => 'Admin::PersonActivityRelation', :foreign_key => :person_id
   has_one :base_info, :class_name => 'InfoRegister::BaseInfo', :foreign_key => :owner_id
+
   #活动人员参加的所有活动
   def activities
     Admin::ReviewActivity.joins { :person_activity_relations }.
@@ -105,4 +106,5 @@ class Admin::Person < ActiveRecord::Base
     return true if Admin::ReviewActivity.can_login_by_rule? now_date_time, activity_relation.login_begin_time, activity_relation.login_end_time
     return Admin::ReviewActivity.can_login_by_rule? now_date_time, activity.begin_time, activity.end_time
   end
+
 end

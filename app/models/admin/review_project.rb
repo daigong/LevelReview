@@ -104,6 +104,7 @@ class Admin::ReviewProject < ActiveRecord::Base
     department_review_activity_relation = Admin::ReviewActivityRelation.new
     department_review_activity_relation.pre_activity=info_register_activity
     department_review_activity_relation.activity=department_review_activity
+    department_review_activity_relation.save
     #教务处审核活动关系
     jiaowu_review_activity_relation=Admin::ReviewActivityRelation.new
     jiaowu_review_activity_relation.pre_activity=department_review_activity

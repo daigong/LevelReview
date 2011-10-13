@@ -1,0 +1,14 @@
+<%= form_for @search, :url=>department_review_info_review_index_url(curr_activity) do |f| %>
+    <%= f.label :person_name_contains %>
+    <%= f.text_field :person_name_contains %>
+    <%= f.label :base_info_sex_eq %>
+    <%= f.text_field :base_info_sex_eq %>
+    <%= f.label :base_info_review_type_eq %>
+    <%= f.text_field :base_info_review_type_eq %>
+    <%= f.submit "查询" %>
+<% end %>
+
+<% @people.each do |person| %>
+    <%= person.person_name %> <br/>
+<% end %>
+<%= will_paginate @people, {:previous_label => '上一页', :next_label => '下一页'} %>
