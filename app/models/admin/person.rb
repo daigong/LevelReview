@@ -24,6 +24,12 @@ class Admin::Person < ActiveRecord::Base
       #如果不再活动内，加入活动
       relation = Admin::PersonActivityRelation.new
       relation.activity=admin_review_activity
+      #配置人员参加活动的初始状态，如果是info_register默认是pass，而其他为create
+      if admin_review_activity.activity_type=="info_register"
+        relation.activity_result="pass"
+      else
+        relation.activity_result="create"
+      end
       relation.person=self
       relation.save
       return true;

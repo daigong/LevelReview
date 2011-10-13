@@ -13,7 +13,8 @@
   菜单:
   <%= link_to "新建评选项目", new_admin_review_project_path %>、
   <%= link_to "评选项目维护", admin_review_projects_path %>
-  、系统人员维护、密码修改
+  <%= link_to "系统人员维护", admin_people_path %>
+  密码修改
   <%= link_to "登出", login_out_url %>
 </div>
 <%= yield %>

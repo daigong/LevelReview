@@ -25,23 +25,22 @@
   <div>
     <% @admin_review_project.project_activities.each do |activity| %>
         <div>
-          <p>活动名字：<%= activity.name %></p>
-
-          <p>
-            <b>开始时间：</b>
-            <%= activity.begin_time %>
-            <b>结束时间：</b>
-            <%= activity.end_time %>
-            <%= link_to "进入活动中维护", activity %>
-          </p>
+          <%= semantic_form_for activity, :url=>admin_review_activity_path(activity), :validate=>true do |f| %>
+              <%= f.input :name, :label=>"活动名称" %>
+              <%= f.input :begin_time, :label=>"开始时间", :as=>:string %>
+              <%= f.input :end_time, :label=>"结束时间", :as=>:string %>
+              <%= f.submit "修改" %>
+          <% end %>
+          <%= link_to "进入活动中维护", activity %>
           <hr/>
         </div>
-
     <% end %>
   </div>
 </div>
 <div>
-  <div><h3>其他配置</h3></div>
+  <div>
+    <h3>其他配置</h3>
+  </div>
   <div>
     部门排序配置
   </div>

@@ -15,9 +15,15 @@
         <td><%= admin_person.user_name %></td>
         <td><%= admin_person.password %></td>
         <td><%= admin_person.person_name %></td>
-        <td><%= link_to 'Show', admin_person %></td>
-        <td><%= link_to 'Edit', edit_admin_person_path(admin_person) %></td>
-        <td><%= link_to 'Destroy', admin_person, confirm: 'Are you sure?', method: :delete %></td>
+        <%#TODO 异常 管理员不可以被删除 %>
+        <% if !admin_person.user_name.nil?&&admin_person.user_name=='admin' %>
+            <td colspan="2">
+              管理员修改
+            </td>
+        <% else %>
+            <td><%= link_to '修改', edit_admin_person_path(admin_person) %></td>
+            <td><%= link_to '显示', admin_person %></td>
+        <% end %>
       </tr>
   <% end %>
 </table>
