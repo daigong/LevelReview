@@ -11,12 +11,12 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111012061412) do
+ActiveRecord::Schema.define(:version => 20111013022657) do
 
   create_table "admin_departments", :force => true do |t|
-    t.string "name"
-    t.text "remark"
-    t.integer "subject_id"
+    t.string   "name"
+    t.text     "remark"
+    t.integer  "subject_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -24,29 +24,31 @@ ActiveRecord::Schema.define(:version => 20111012061412) do
   add_index "admin_departments", ["subject_id"], :name => "index_admin_departments_on_subject_id"
 
   create_table "admin_people", :force => true do |t|
-    t.string "user_name"
-    t.string "password"
-    t.string "person_name"
+    t.string   "user_name"
+    t.string   "password"
+    t.string   "person_name"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer "department_id"
+    t.integer  "department_id"
+    t.string   "telephone"
+    t.string   "email"
   end
 
   create_table "admin_person_activity_relations", :force => true do |t|
-    t.integer "person_id"
-    t.integer "activity_id"
-    t.string "review_result"
+    t.integer  "person_id"
+    t.integer  "activity_id"
+    t.string   "review_result"
     t.datetime "review_time"
-    t.integer "reviewer_id"
-    t.string "confirm_result"
+    t.integer  "reviewer_id"
+    t.string   "confirm_result"
     t.datetime "confirm_time"
-    t.integer "confirmor_id"
-    t.string "activity_result"
+    t.integer  "confirmor_id"
+    t.string   "activity_result"
     t.datetime "login_begin_time"
     t.datetime "login_end_time"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean "is_leader", :default => false
+    t.boolean  "is_leader",        :default => false
   end
 
   add_index "admin_person_activity_relations", ["activity_id"], :name => "index_admin_person_activity_relations_on_activity_id"
@@ -55,11 +57,11 @@ ActiveRecord::Schema.define(:version => 20111012061412) do
   add_index "admin_person_activity_relations", ["reviewer_id"], :name => "index_admin_person_activity_relations_on_reviewer_id"
 
   create_table "admin_review_activities", :force => true do |t|
-    t.string "name"
-    t.string "activity_type"
+    t.string   "name"
+    t.string   "activity_type"
     t.datetime "begin_time"
     t.datetime "end_time"
-    t.integer "review_project_id"
+    t.integer  "review_project_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -67,8 +69,8 @@ ActiveRecord::Schema.define(:version => 20111012061412) do
   add_index "admin_review_activities", ["review_project_id"], :name => "index_admin_review_activities_on_review_project_id"
 
   create_table "admin_review_activity_relations", :force => true do |t|
-    t.integer "pre_activity_id"
-    t.integer "activity_id"
+    t.integer  "pre_activity_id"
+    t.integer  "activity_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -77,19 +79,19 @@ ActiveRecord::Schema.define(:version => 20111012061412) do
   add_index "admin_review_activity_relations", ["pre_activity_id"], :name => "index_admin_review_activity_relations_on_pre_activity_id"
 
   create_table "admin_review_projects", :force => true do |t|
-    t.string "name"
-    t.string "state"
-    t.text "remark"
+    t.string   "name"
+    t.string   "state"
+    t.text     "remark"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "admin_serial_code_batches", :force => true do |t|
-    t.string "name"
+    t.string   "name"
     t.datetime "end_time"
     t.datetime "build_time"
-    t.text "remark"
-    t.integer "activity_id"
+    t.text     "remark"
+    t.integer  "activity_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -97,10 +99,10 @@ ActiveRecord::Schema.define(:version => 20111012061412) do
   add_index "admin_serial_code_batches", ["activity_id"], :name => "index_admin_serial_code_batches_on_activity_id"
 
   create_table "admin_serial_codes", :force => true do |t|
-    t.string "code"
-    t.integer "person_id"
+    t.string   "code"
+    t.integer  "person_id"
     t.datetime "used_time"
-    t.integer "batch_id"
+    t.integer  "batch_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -109,28 +111,28 @@ ActiveRecord::Schema.define(:version => 20111012061412) do
   add_index "admin_serial_codes", ["person_id"], :name => "index_admin_serial_codes_on_person_id"
 
   create_table "admin_subjects", :force => true do |t|
-    t.string "name"
-    t.text "remark"
+    t.string   "name"
+    t.text     "remark"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "info_register_base_infos", :force => true do |t|
-    t.string "nation"
-    t.string "sex"
-    t.string "birthday"
-    t.string "last_review_time"
-    t.string "invite_time"
-    t.string "degree"
-    t.string "edu_background"
-    t.string "current_level"
-    t.string "advance_level"
-    t.string "review_type"
-    t.string "computer_exam"
-    t.string "computer_exam_file_name"
-    t.string "foreign_exam"
-    t.string "foreign_exam_file_name"
-    t.integer "owner_id"
+    t.string   "nation"
+    t.string   "sex"
+    t.string   "birthday"
+    t.string   "last_review_time"
+    t.string   "invite_time"
+    t.string   "degree"
+    t.string   "edu_background"
+    t.string   "current_level"
+    t.string   "advance_level"
+    t.string   "review_type"
+    t.string   "computer_exam"
+    t.string   "computer_exam_file_name"
+    t.string   "foreign_exam"
+    t.string   "foreign_exam_file_name"
+    t.integer  "owner_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

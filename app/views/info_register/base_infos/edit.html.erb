@@ -3,9 +3,14 @@
                       :url=> info_register_base_info_path(curr_activity, @info_register_base_info),
                       :validate=>true do |f| %>
     <%= f.inputs :name=>'个人基本信息录入' do %>
-        <%= semantic_extra_input :person_name, :label=>'姓名', :class=>'required', :value=>@info_register_base_info.owner.person_name %>
-        <%= semantic_extra_select :department_id, department_options(@info_register_base_info.owner.department.id),
+        <%= semantic_extra_input "person[person_name]", :label=>'姓名',
+                                 :class=>'required', :value=>@info_register_base_info.owner.person_name %>
+        <%= semantic_extra_select "person[department_id]", department_options(@info_register_base_info.owner.department.id),
                                   :label=>'部门', :class=>'required' %>
+        <%= semantic_extra_input "person[telephone]", :label=>'联系电话',
+                                 :class=>'required', :value=>@info_register_base_info.owner.telephone %>
+        <%= semantic_extra_input "person[email]", :label=>'电子邮件',
+                                 :value=>@info_register_base_info.owner.email %>
         <%= f.input :nation, :label=>'民族' %>
         <%= f.input :sex, :label=>'性别' %>
         <%= f.input :birthday, :label=>'出生年月' %>

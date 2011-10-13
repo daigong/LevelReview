@@ -21,7 +21,9 @@ class InfoRegister::BaseInfosController < InfoRegister::BaseController
   end
 
   def update
+    #更新人员基本信息 个人姓名、手机、邮件
     @info_register_base_info = InfoRegister::BaseInfo.find(params[:id])
+    @info_register_base_info.owner.update_attributes(params[:person], :validate=>false)
     if @info_register_base_info.update_attributes(params[:info_register_base_info])
       flash[:notice]='填写成功'
     end
