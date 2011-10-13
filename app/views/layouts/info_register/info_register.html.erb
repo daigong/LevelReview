@@ -11,7 +11,7 @@
 <body>
 <div>
   <%= link_to '基本信息录入', new_info_register_base_info_path(curr_activity) %>
-  ，论文....
+  <%= link_to '论文信息录入', info_register_articles_path(curr_activity) %>
   <%= link_to "登出", login_out_url %>
 </div>
 <div>

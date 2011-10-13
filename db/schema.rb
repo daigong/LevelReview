@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111013022657) do
+ActiveRecord::Schema.define(:version => 20111013032415) do
 
   create_table "admin_departments", :force => true do |t|
     t.string   "name"
@@ -116,6 +116,37 @@ ActiveRecord::Schema.define(:version => 20111013022657) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "info_register_article_activity_relations", :force => true do |t|
+    t.integer  "article_id"
+    t.integer  "activity_id"
+    t.string   "result"
+    t.integer  "reviewer_id"
+    t.text     "remark"
+    t.datetime "review_time"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "info_register_article_activity_relations", ["activity_id"], :name => "index_info_register_article_activity_relations_on_activity_id"
+  add_index "info_register_article_activity_relations", ["article_id"], :name => "index_info_register_article_activity_relations_on_article_id"
+  add_index "info_register_article_activity_relations", ["reviewer_id"], :name => "index_info_register_article_activity_relations_on_reviewer_id"
+
+  create_table "info_register_articles", :force => true do |t|
+    t.integer  "owner_id"
+    t.string   "title"
+    t.string   "publication_name"
+    t.string   "publish_date"
+    t.string   "person_rank"
+    t.string   "publication_type"
+    t.string   "upload_time"
+    t.string   "name"
+    t.string   "file_name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "info_register_articles", ["owner_id"], :name => "index_info_register_articles_on_owner_id"
 
   create_table "info_register_base_infos", :force => true do |t|
     t.string   "nation"

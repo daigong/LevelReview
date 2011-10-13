@@ -1,7 +1,5 @@
 LevelReview::Application.routes.draw do
-
-  get "vote_meeting_index/index"
-
+  
   #首页为登录页面
   root :to=>'common/login#login', :as=>'login'
   post '/login_commit'=>'common/login#login_commit', :as=>'login_commit'
@@ -57,6 +55,7 @@ LevelReview::Application.routes.draw do
       get 'index' => 'InfoRegisterIndex#index', :as=>:index
       #人员基本信息
       resources :base_infos
+      resources :articles
     end
   end
   #活动--参评人信息录入配置 end

@@ -1,0 +1,48 @@
+<h3>论文</h3>
+<!-- 增加表单 -->
+<%= semantic_form_for @new_article,
+                      :url=>info_register_articles_path(curr_activity),
+                      :validate=>true do |f| %>
+    <%= f.inputs do %>
+        <%= f.input :title %>
+        <%= f.input :publication_name %>
+        <%= f.input :publish_date %>
+        <%= f.input :person_rank %>
+        <%= f.input :publication_type %>
+        <%= f.input :upload_time %>
+        <%= f.input :name %>
+        <%= f.input :file_name %>
+    <% end %>
+
+    <%= f.buttons do %>
+        <%= f.commit_button %>
+    <% end %>
+<% end %>
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Publication name</th>
+    <th>Publish date</th>
+    <th>Person rank</th>
+    <th>Publication type</th>
+    <th>Upload time</th>
+    <th>Name</th>
+    <th>File name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+  <% @info_register_articles.each do |info_register_article| %>
+      <tr>
+        <td><%= info_register_article.title %></td>
+        <td><%= info_register_article.publication_name %></td>
+        <td><%= info_register_article.publish_date %></td>
+        <td><%= info_register_article.person_rank %></td>
+        <td><%= info_register_article.publication_type %></td>
+        <td><%= info_register_article.upload_time %></td>
+        <td><%= info_register_article.name %></td>
+        <td><%= info_register_article.file_name %></td>
+        <td><%= link_to 'Destroy', info_register_article_path(curr_activity, info_register_article), confirm: 'Are you sure?', method: :delete %></td>
+      </tr>
+  <% end %>
+</table>

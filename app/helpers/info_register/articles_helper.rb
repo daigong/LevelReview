@@ -1,0 +1,2 @@
+module InfoRegister::ArticlesHelper
+end
