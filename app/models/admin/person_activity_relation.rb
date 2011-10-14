@@ -18,12 +18,20 @@ class Admin::PersonActivityRelation < ActiveRecord::Base
     relation = Admin::PersonActivityRelation.find_by_activity_id_and_person_id activity.id, person.id
     return !relation.nil?&&relation.confirm_result=='pass'
   end
-  
+
   #是否进行审核
   def self.review? activity, person
     relation = Admin::PersonActivityRelation.find_by_activity_id_and_person_id activity.id, person.id
     return !relation.nil?&&relation.review_result!='create'
   end
+
+  #被审核,options 审核结果
+  def review_by person, options={}
+    self.reviewer_id=login_user.id
+    self.review_time=DateTime.now
+    self.update_attributes options
+  end
+
   #活动进行确认
   def confirm_by person
     self.confirmor_id = person.id
@@ -31,5 +39,5 @@ class Admin::PersonActivityRelation < ActiveRecord::Base
     self.confirm_result="pass"
     self.save
   end
-  
+
 end
