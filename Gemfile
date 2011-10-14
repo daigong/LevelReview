@@ -2,8 +2,8 @@
 
 gem 'rails', '3.1.0'
 
-#gem "rake", "0.9.2"
-gem "rake", "0.8.7"
+gem "rake", "0.9.2"
+#gem "rake", "0.8.7"
 
 gem 'rack', '1.3.3'
 

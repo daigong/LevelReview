@@ -10,6 +10,7 @@ class DepartmentReview::InfoReviewController < DepartmentReview::BaseController
   #审核人员信息
   def review_person_register_info
     relation = Admin::PersonActivityRelation.find params[:relation_id]
+    relation.reviewer_id=login_user.id
     relation.review_time=DateTime.now
     relation.update_attributes params[:admin_person_activity_relation]
     flash[:notice] = '审核成功！'

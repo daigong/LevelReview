@@ -15,7 +15,9 @@
     <% else %>
         <% unless person_info_confirm?(curr_activity, person) %>
             <%= link_to "修改审核", department_review_info_show_path(curr_activity, person) %>
-            <%= link_to("确认审核", department_review_info_show_path(curr_activity, person), :confirm => "确认审核该信息？") if leader_login? %>
+            <%= link_to("确认审核", department_review_info_confirm_path(curr_activity, person), :confirm => "确认审核该信息？") if leader_login? %>
+        <% else %>
+            组长确认完毕
         <% end %>
     <% end %>
     <br/>
