@@ -14,6 +14,9 @@
   ，部门内排序
   <%= link_to "登出", login_out_url %>
 </div>
+<div>
+  <%= flash[:notice] %>
+</div>
 <%= yield %>
 </body>
 </html>

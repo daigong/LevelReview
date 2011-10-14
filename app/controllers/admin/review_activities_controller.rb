@@ -34,8 +34,15 @@ class Admin::ReviewActivitiesController < Admin::BaseController
     params[:search] = {} if params[:search].nil?
     @search = Admin::Person.search params[:search]
     #子查询查询到已经参加到活动的人的id
+    #配置人员模块差分：对info_register来说，选择人员在关系表中role_type是：info_register，而其他模块为review
+    if  @admin_review_activity.activity_type=="info_register"
+      search_type = 'info_register'
+    else
+      search_type = 'review'
+    end
     @people = @search.
-        where('admin_people.id in ( select admin_people.id from admin_people inner join admin_person_activity_relations relation on relation.person_id = admin_people.id where relation.activity_id = ? )', @admin_review_activity.id).
+        joins(:person_activity_relations).
+        where({:person_activity_relations=>{:activity_id.eq=>@admin_review_activity.id, :role_type.eq=>search_type}}).
         order('admin_people.department_id asc').
         paginate(:page => params[:page]);
   end
@@ -115,7 +122,7 @@ class Admin::ReviewActivitiesController < Admin::BaseController
     @admin_review_activity = Admin::ReviewActivity.find(params[:id])
     @people_in_activity = @search.
         joins(:person_activity_relations).
-        where('admin_person_activity_relations.activity_id=?', @admin_review_activity.id).
+        where({:person_activity_relations=>{:activity_id.eq=>@admin_review_activity.id, :role_type.eq=>"review"}}).
         order('admin_people.department_id asc').
         order('admin_person_activity_relations.is_leader desc').
         paginate(:page => params[:page]);

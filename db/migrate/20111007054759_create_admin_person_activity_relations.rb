@@ -3,13 +3,13 @@ class CreateAdminPersonActivityRelations < ActiveRecord::Migration
     create_table :admin_person_activity_relations do |t|
       t.references :person
       t.references :activity
-      t.string :review_result
+      t.string :review_result,:default => 'create'
       t.datetime :review_time
       t.references :reviewer
-      t.string :confirm_result
+      t.string :confirm_result,:default => 'create'
       t.datetime :confirm_time
       t.references :confirmor
-      t.string :activity_result
+      t.string :activity_result,:default => 'create'
       t.datetime :login_begin_time
       t.datetime :login_end_time
 

@@ -25,13 +25,15 @@ class Admin::ReviewActivity < ActiveRecord::Base
   end
 
   #获得活动可以看见的人员信息列表，即通过上一个活动的人员列表
+  #人员参与活动类型必须为role_type=info_register
   #search传递进来的查询条件
   def pre_activity_pass_people search
     search = search.joins(:person_activity_relations)
     self.pre_activity_relations.each do |relation|
       search = search.where({:person_activity_relations=>{
           :activity_result.eq=>'pass',
-          :activity_id.eq=>relation.pre_activity_id
+          :activity_id.eq=>relation.pre_activity_id,
+          :role_type.eq=>'info_register'
       }})
     end
     search

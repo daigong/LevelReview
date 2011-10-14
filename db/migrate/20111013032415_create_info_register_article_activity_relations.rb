@@ -3,7 +3,7 @@ class CreateInfoRegisterArticleActivityRelations < ActiveRecord::Migration
     create_table :info_register_article_activity_relations do |t|
       t.references :article
       t.references :activity
-      t.string :result
+      t.string :result, :default=>'create'
       t.references :reviewer
       t.text :remark
       t.datetime :review_time

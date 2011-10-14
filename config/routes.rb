@@ -74,6 +74,8 @@ LevelReview::Application.routes.draw do
       get 'info_review/index'=>'InfoReview#index', :as=>:info_review_index
       #参评人信息显示
       get 'info_show/:person_id'=>'InfoShow#show_person_register_info',:as=>:info_show
+      #审核参评人信息
+      put 'info_review/:relation_id'=>'InfoShow#review_person_register_info',:as=>:info_review
     end
   end
   #活动--部门审核 end

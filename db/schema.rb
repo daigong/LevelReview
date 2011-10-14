@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111013032415) do
+ActiveRecord::Schema.define(:version => 20111014012812) do
 
   create_table "admin_departments", :force => true do |t|
     t.string   "name"
@@ -37,18 +37,19 @@ ActiveRecord::Schema.define(:version => 20111013032415) do
   create_table "admin_person_activity_relations", :force => true do |t|
     t.integer  "person_id"
     t.integer  "activity_id"
-    t.string   "review_result"
+    t.string   "review_result",    :default => "create"
     t.datetime "review_time"
     t.integer  "reviewer_id"
-    t.string   "confirm_result"
+    t.string   "confirm_result",   :default => "create"
     t.datetime "confirm_time"
     t.integer  "confirmor_id"
-    t.string   "activity_result"
+    t.string   "activity_result",  :default => "create"
     t.datetime "login_begin_time"
     t.datetime "login_end_time"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "is_leader",        :default => false
+    t.string   "role_type"
   end
 
   add_index "admin_person_activity_relations", ["activity_id"], :name => "index_admin_person_activity_relations_on_activity_id"
@@ -80,7 +81,7 @@ ActiveRecord::Schema.define(:version => 20111013032415) do
 
   create_table "admin_review_projects", :force => true do |t|
     t.string   "name"
-    t.string   "state"
+    t.string   "state",      :default => "create"
     t.text     "remark"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -120,7 +121,7 @@ ActiveRecord::Schema.define(:version => 20111013032415) do
   create_table "info_register_article_activity_relations", :force => true do |t|
     t.integer  "article_id"
     t.integer  "activity_id"
-    t.string   "result"
+    t.string   "result",      :default => "create"
     t.integer  "reviewer_id"
     t.text     "remark"
     t.datetime "review_time"

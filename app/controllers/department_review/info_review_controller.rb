@@ -5,4 +5,5 @@ class DepartmentReview::InfoReviewController < DepartmentReview::BaseController
     @search = Admin::Person.search params[:search]
     @people = curr_activity.pre_activity_pass_people(@search).paginate(:page => params[:page]);
   end
+  
 end

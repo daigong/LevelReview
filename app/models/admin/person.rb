@@ -15,7 +15,7 @@ class Admin::Person < ActiveRecord::Base
     return people_in_activity.include? self
   end
 
-  #人员参加一个活动
+  #人员参加一个活动，通过admin_review_activity.activity_type的类型来判定人员加入活动中role_type的类型
   def join_activity admin_review_activity
     #先判断人员是否已经在活动内
     if in_activity? admin_review_activity
@@ -26,15 +26,65 @@ class Admin::Person < ActiveRecord::Base
       relation = Admin::PersonActivityRelation.new
       relation.activity=admin_review_activity
       #配置人员参加活动的初始状态，如果是info_register默认是pass，而其他为create
+      #同时参与活动中的角色为模块info_register其他模块为配置review
       if admin_review_activity.activity_type=="info_register"
+        relation.role_type="info_register"
         relation.activity_result="pass"
       else
+        relation.role_type="review"
         relation.activity_result="create"
       end
       relation.person=self
       relation.save
       return true;
     end
+  end
+
+  #作为提供个人信息的方式加入一个活动
+  #需要判定人员是否参与前置活动(有可能有多个)并且在所有前置活动中通过
+  #如果没有则不可以参加本次活动 return false
+  #如果成功添加返回添加的关系Admin::PersonActivityRelation
+  def join_activity_as_info_register_role_type admin_review_activity
+    #判定是否已经存在
+    person_activity_relation = Admin::PersonActivityRelation.find_by_activity_id_and_person_id self.id, admin_review_activity.id
+    return person_activity_relation unless @person_activity_relation.nil?
+    #不存在添加
+    if join_activity_as_info_register_role_type? admin_review_activity
+      as_info_register_role_type_relation = Admin::PersonActivityRelation.new
+      as_info_register_role_type_relation.activity_id=admin_review_activity.id
+      as_info_register_role_type_relation.person_id=self.id
+      as_info_register_role_type_relation.role_type='info_register'
+      as_info_register_role_type_relation.save
+      return as_info_register_role_type_relation
+    else
+      return false
+    end
+  end
+
+  #判定是否可以作为提供个人信息的方式加入一个活动
+  #return false 需要判定人员是否参与前置活动(有可能有多个)并且在所有前置活动中通过
+  #如果没有则不可以参加本次活动
+  def join_activity_as_info_register_role_type? admin_review_activity
+    can_join_activity = false;
+    admin_review_activity.pre_activity_relations.each do |relation|
+      if pass_activity? relation.pre_activity
+        can_join_activity = true
+      else
+        can_join_activity=false;
+        break;
+      end
+    end
+    return can_join_activity;
+  end
+
+  #人员在该活动是否通过
+  #return
+  #如果人员不再活动中 false
+  #如果人员活动中未通过 false
+  #如果人员活动中通过 true
+  def pass_activity? admin_review_activity
+    relation = Admin::PersonActivityRelation.find_by_person_id_and_activity_id self.id, admin_review_activity.id
+    return !relation.nil?&&relation.activity_result=='pass'
   end
 
   #退出活动
@@ -44,7 +94,6 @@ class Admin::Person < ActiveRecord::Base
       return false;
     else
       relations = Admin::PersonActivityRelation.find_all_by_person_id_and_activity_id self.id, admin_review_activity.id
-      #理论上只可能有一个活动关联
       relations.each do |relation|
         relation.destroy
       end
@@ -96,11 +145,18 @@ class Admin::Person < ActiveRecord::Base
     end
   end
 
-  #判定人员是否可以参与到某个活动中（是否人员与活动产生关系，同时人员是否在可登录时间内，包括特殊时间的设置）
+  #判定人员是否可以参与到某个活动中（是否人员与活动产生关系，如果产生关系是否还需要判断在关系中承担的任务role_type:如果'info_register'
+  #并且所在活动类型还不是info_register说明该人员在审核活动中充当信息提供者,详见Admin::PersonActivityRelation说明
+  #，同时人员是否在可登录时间内，包括特殊时间的设置）
   #activity 活动
   def now_can_join_activity? activity
-    activity_relation = Admin::PersonActivityRelation.
-        find_by_person_id_and_activity_id self.id, activity.id
+    if activity.activity_type == 'info_register'
+      activity_relation = Admin::PersonActivityRelation.
+          find_by_person_id_and_activity_id_and_role_type self.id, activity.id, 'info_register'
+    else
+      activity_relation = Admin::PersonActivityRelation.
+          find_by_person_id_and_activity_id_and_role_type self.id, activity.id, 'review'
+    end
     return false if activity_relation.nil?
     now_date_time = DateTime.now
     return true if Admin::ReviewActivity.can_login_by_rule? now_date_time, activity_relation.login_begin_time, activity_relation.login_end_time
