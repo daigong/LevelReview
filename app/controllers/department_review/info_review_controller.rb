@@ -18,7 +18,7 @@ class DepartmentReview::InfoReviewController < DepartmentReview::BaseController
   end
 
   def confirm_person_register_info
-    relation = Admin::PersonActivityRelation.find params[:relation_id]
+    relation = Admin::PersonActivityRelation.find_by_person_id_and_activity_id params[:person_id], params[:activity_id]
     relation.confirmor_id = login_user.id
     relation.confirm_time = DateTime.now
     relation.confirm_result="pass"

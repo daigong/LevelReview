@@ -77,7 +77,7 @@ LevelReview::Application.routes.draw do
       #审核参评人信息
       put 'info_review/:relation_id'=>'InfoReview#review_person_register_info',:as=>:info_review
       #组长确认
-      get 'info_review/confirm/:relation_id'=>'InfoReview#confirm_person_register_info',:as=>:info_confirm
+      get 'info_review/confirm/:person_id'=>'InfoReview#confirm_person_register_info',:as=>:info_confirm
     end
   end
   #活动--部门审核 end
