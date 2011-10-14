@@ -15,29 +15,15 @@ class Admin::PersonActivityRelation < ActiveRecord::Base
   belongs_to :confirmor, :class_name => 'Admin::Person'
   #是否已经进行确认审核？
   def self.confirm? activity, person
-    relation = Admin::PersonActivityRelation.find_by_activity_id_and_person_id activity.id, person.id
+    relation = Admin::PersonActivityRelation.
+        find_by_activity_id_and_person_id_and_role_type activity.id, person.id, "info_register"
     return !relation.nil?&&relation.confirm_result=='pass'
   end
 
   #是否进行审核
   def self.review? activity, person
-    relation = Admin::PersonActivityRelation.find_by_activity_id_and_person_id activity.id, person.id
+    relation = Admin::PersonActivityRelation.
+        find_by_activity_id_and_person_id_and_role_type activity.id, person.id, "info_register"
     return !relation.nil?&&relation.review_result!='create'
   end
-
-  #被审核,options 审核结果
-  def review_by person, options={}
-    self.reviewer_id=person.id
-    self.review_time=DateTime.now
-    self.update_attributes options
-  end
-
-  #活动进行确认
-  def confirm_by person
-    self.confirmor_id = person.id
-    self.confirm_time = DateTime.now
-    self.confirm_result="pass"
-    self.save
-  end
-
 end

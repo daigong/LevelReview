@@ -1,0 +1,5 @@
+<%= semantic_form_for @person_activity_relation, :url => keyan_review_info_review_path(curr_activity, @person_activity_relation) do |f| %>
+    <%= render 'common/person_info/base_info', :locals=>{:person=>@person, :relation=>@person_activity_relation} %>
+    <%= f.input :review_result %>
+    <%= f.submit "提交" %>
+<% end %>

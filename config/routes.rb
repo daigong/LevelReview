@@ -90,6 +90,14 @@ LevelReview::Application.routes.draw do
     scope :path=>':activity_id' do
       #活动首页
       get 'index' => 'ReviewIndex#index', :as=>:index
+      #信息审阅
+      get 'info_review/index'=>'InfoReview#index', :as=>:info_review_index
+      #参评人信息显示
+      get 'info_show/:person_id'=>'InfoShow#show_person_register_info',:as=>:info_show
+      #审核参评人信息
+      put 'info_review/:relation_id'=>'InfoReview#review_person_register_info',:as=>:info_review
+      #组长确认
+      get 'info_review/confirm/:person_id'=>'InfoReview#confirm_person_register_info',:as=>:info_confirm
     end
   end
   #活动--教务审核 end
@@ -103,6 +111,14 @@ LevelReview::Application.routes.draw do
     scope :path=>':activity_id' do
       #活动首页
       get 'index' => 'ReviewIndex#index', :as=>:index
+      #信息审阅
+      get 'info_review/index'=>'InfoReview#index', :as=>:info_review_index
+      #参评人信息显示
+      get 'info_show/:person_id'=>'InfoShow#show_person_register_info',:as=>:info_show
+      #审核参评人信息
+      put 'info_review/:relation_id'=>'InfoReview#review_person_register_info',:as=>:info_review
+      #组长确认
+      get 'info_review/confirm/:person_id'=>'InfoReview#confirm_person_register_info',:as=>:info_confirm
     end
   end
   #活动--科研审核 end
@@ -115,6 +131,14 @@ LevelReview::Application.routes.draw do
     scope :path=>':activity_id' do
       #活动首页
       get 'index' => 'ReviewIndex#index', :as=>:index
+      #信息审阅
+      get 'info_review/index'=>'InfoReview#index', :as=>:info_review_index
+      #参评人信息显示
+      get 'info_show/:person_id'=>'InfoShow#show_person_register_info',:as=>:info_show
+      #审核参评人信息
+      put 'info_review/:relation_id'=>'InfoReview#review_person_register_info',:as=>:info_review
+      #组长确认
+      get 'info_review/confirm/:person_id'=>'InfoReview#confirm_person_register_info',:as=>:info_confirm
     end
   end
   #活动--人事审核 end

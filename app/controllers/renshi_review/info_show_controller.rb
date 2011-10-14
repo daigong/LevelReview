@@ -1,5 +1,5 @@
 #encoding=utf-8
-class DepartmentReview::InfoShowController < DepartmentReview::BaseController
+class RenshiReview::InfoShowController < RenshiReview::BaseController
   #显示人员录入的参评信息
   def show_person_register_info
     @person = Admin::Person.find params[:person_id]
@@ -11,7 +11,7 @@ class DepartmentReview::InfoShowController < DepartmentReview::BaseController
       @person_activity_relation = @person.join_activity_as_info_register_role_type curr_activity
       unless @person_activity_relation
         flash[:notice] = '该人员没有参与参评活动，请确认！'
-        redirect_to department_review_info_review_index_url(curr_activity)
+        redirect_to renshi_review_info_review_index_url(curr_activity)
       end
     end
   end

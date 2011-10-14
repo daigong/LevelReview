@@ -10,7 +10,11 @@
 </head>
 <body>
 <div>
-  教务审核
+  <%= flash[:notice] %>
+</div>
+<div>
+  <%= link_to "教务审核", jiaowu_review_info_review_index_url(curr_activity) %>
+
   <%= link_to "登出", login_out_url %>
 </div>
 <%= yield %>

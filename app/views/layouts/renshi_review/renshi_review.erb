@@ -10,7 +10,12 @@
 </head>
 <body>
 <div>
-  人事审核
+  <div>
+  <%= flash[:notice] %>
+</div>
+  <%= link_to "人事审核", renshi_review_info_review_index_url(curr_activity) %>
+
+
   <%= link_to "登出", login_out_url %>
 </div>
 <%= yield %>

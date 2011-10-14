@@ -1,10 +1,10 @@
 #encoding=utf-8
-class DepartmentReview::InfoReviewController < DepartmentReview::BaseController
-  #部门审核资料列表
+class JiaowuReview::InfoReviewController < JiaowuReview::BaseController
+  #审核资料列表
   def index
     @search = Admin::Person.search params[:search]
-    add_department_search = @search.where({:department_id.eq=>login_user.department_id})
-    @people = curr_activity.pre_activity_pass_people(add_department_search).paginate(:page => params[:page]);
+    @people = curr_activity.pre_activity_pass_people(@search).
+        paginate(:page => params[:page]);
   end
 
   #审核人员信息

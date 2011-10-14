@@ -46,8 +46,8 @@ class Admin::Person < ActiveRecord::Base
   #如果成功添加返回添加的关系Admin::PersonActivityRelation
   def join_activity_as_info_register_role_type admin_review_activity
     #判定是否已经存在
-    person_activity_relation = Admin::PersonActivityRelation.find_by_activity_id_and_person_id self.id, admin_review_activity.id
-    return person_activity_relation unless @person_activity_relation.nil?
+    person_activity_relation = Admin::PersonActivityRelation.find_by_activity_id_and_person_id_and_role_type self.id, admin_review_activity.id,'info_register'
+    return person_activity_relation unless person_activity_relation.nil?
     #不存在添加
     if join_activity_as_info_register_role_type? admin_review_activity
       as_info_register_role_type_relation = Admin::PersonActivityRelation.new
@@ -83,7 +83,7 @@ class Admin::Person < ActiveRecord::Base
   #如果人员活动中未通过 false
   #如果人员活动中通过 true
   def pass_activity? admin_review_activity
-    relation = Admin::PersonActivityRelation.find_by_person_id_and_activity_id self.id, admin_review_activity.id
+    relation = Admin::PersonActivityRelation.find_by_person_id_and_activity_id_and_role_type self.id, admin_review_activity.id,"info_register"
     return !relation.nil?&&relation.activity_result=='pass'
   end
 
@@ -163,4 +163,24 @@ class Admin::Person < ActiveRecord::Base
     return Admin::ReviewActivity.can_login_by_rule? now_date_time, activity.begin_time, activity.end_time
   end
 
+  #self person 被审核,options 审核结果
+  def review_activity_by by_person, activity, options={}
+    relation = Admin::PersonActivityRelation.
+        find_by_activity_id_and_person_id_and_role_type activity.id, self.id, "info_register"
+    relation.reviewer_id=by_person.id
+    relation.review_time=DateTime.now
+    relation.update_attributes options
+    relation
+  end
+
+  #self person 活动进行确认
+  def confirm_activity_by by_person, activity
+    relation = Admin::PersonActivityRelation.
+        find_by_activity_id_and_person_id_and_role_type activity.id, self.id, "info_register"
+    relation.confirmor_id = by_person.id
+    relation.confirm_time = DateTime.now
+    relation.confirm_result="pass"
+    relation.save
+    relation
+  end
 end
