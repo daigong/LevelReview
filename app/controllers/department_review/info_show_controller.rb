@@ -3,7 +3,7 @@ class DepartmentReview::InfoShowController < DepartmentReview::BaseController
   #显示人员录入的参评信息
   def show_person_register_info
     @person = Admin::Person.find params[:person_id]
-    @person_activity_relation = Admin::PersonActivityRelation.find_by_activity_id_and_person_id @person.id, curr_activity.id
+    @person_activity_relation = Admin::PersonActivityRelation.find_by_activity_id_and_person_id curr_activity.id,@person.id
     #如果@person_activity_relation=nil 需要检查人员是否参加了上一个活动，
     #如果参与了新增一个role_type='info_register'与活动的关系
     if @person_activity_relation.nil?
