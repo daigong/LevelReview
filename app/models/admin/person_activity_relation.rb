@@ -27,7 +27,7 @@ class Admin::PersonActivityRelation < ActiveRecord::Base
 
   #被审核,options 审核结果
   def review_by person, options={}
-    self.reviewer_id=login_user.id
+    self.reviewer_id=person.id
     self.review_time=DateTime.now
     self.update_attributes options
   end
