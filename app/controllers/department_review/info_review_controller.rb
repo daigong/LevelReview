@@ -16,13 +16,13 @@ class DepartmentReview::InfoReviewController < DepartmentReview::BaseController
     flash[:notice] = '审核成功！'
     redirect_to :back
   end
-
+  #组长确认，并把结果记录在活动结果中
   def confirm_person_register_info
     relation = Admin::PersonActivityRelation.find_by_person_id_and_activity_id params[:person_id], params[:activity_id]
-    relation.confirmor_id = login_user.id
-    relation.confirm_time = DateTime.now
-    relation.confirm_result="pass"
+    relation.confirm_by login_user
+    relation.activity_result=relation.review_result
     relation.save
+    flash[:notice] = '确认审核成功！'
     redirect_to :back
   end
 end

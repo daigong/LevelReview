@@ -24,4 +24,12 @@ class Admin::PersonActivityRelation < ActiveRecord::Base
     relation = Admin::PersonActivityRelation.find_by_activity_id_and_person_id activity.id, person.id
     return !relation.nil?&&relation.review_result!='create'
   end
+  #活动进行确认
+  def confirm_by person
+    self.confirmor_id = person.id
+    self.confirm_time = DateTime.now
+    self.confirm_result="pass"
+    self.save
+  end
+  
 end
