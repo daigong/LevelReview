@@ -10,8 +10,16 @@
 
 <% @people.each do |person| %>
     <%= person.person_name %>
-    <%= link_to "查看信息", department_review_info_show_path(curr_activity, person) %>
+    <% unless person_info_review?(curr_activity, person) %>
+        <%= link_to "审核信息", department_review_info_show_path(curr_activity, person) %>
+    <% else %>
+        <% unless person_info_confirm?(curr_activity, person) %>
+            <%= link_to "修改审核", department_review_info_show_path(curr_activity, person) %>
+            <%= link_to("确认审核", department_review_info_show_path(curr_activity, person), :confirm => "确认审核该信息？") if leader_login? %>
+        <% end %>
+    <% end %>
     <br/>
 <% end %>
+
 
 <%= will_paginate @people, {:previous_label => '上一页', :next_label => '下一页'} %>

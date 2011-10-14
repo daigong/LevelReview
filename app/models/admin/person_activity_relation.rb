@@ -13,4 +13,15 @@ class Admin::PersonActivityRelation < ActiveRecord::Base
   belongs_to :activity, :class_name => 'Admin::ReviewActivity'
   belongs_to :reviewer, :class_name => 'Admin::Person'
   belongs_to :confirmor, :class_name => 'Admin::Person'
+  #是否已经进行确认审核？
+  def self.confirm? activity, person
+    relation = Admin::PersonActivityRelation.find_by_activity_id_and_person_id activity.id, person.id
+    return !relation.nil?&&relation.confirm_result=='pass'
+  end
+  
+  #是否进行审核
+  def self.review? activity, person
+    relation = Admin::PersonActivityRelation.find_by_activity_id_and_person_id activity.id, person.id
+    return !relation.nil?&&relation.review_result!='create'
+  end
 end

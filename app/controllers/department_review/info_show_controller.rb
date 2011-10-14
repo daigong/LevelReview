@@ -15,11 +15,4 @@ class DepartmentReview::InfoShowController < DepartmentReview::BaseController
     end
   end
 
-  #审核人员信息
-  def review_person_register_info
-    relation = Admin::PersonActivityRelation.find params[:relation_id]
-    relation.update_attributes params[:admin_person_activity_relation]
-    flash[:notice] = '审核成功！'
-    redirect_to :back
-  end
 end
